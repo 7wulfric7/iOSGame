@@ -21,6 +21,7 @@ class DataStore {
     var localUser: User?
     var usersListener: ListenerRegistration?
     var gameRequestListener: ListenerRegistration?
+    var gameRequestDeletionListener: ListenerRegistration?
     init() {}
     
     func continueWithGuest(completion: @escaping (_ user: User?, _ error: Error?) -> Void) {

@@ -12,4 +12,5 @@ struct GameRequest: Codable {
     var from: String // UserdID who inciated the request
     var to: String // UserID who was invited to play
     var createdAt: TimeInterval
+    var fromUsername: String?
 }
