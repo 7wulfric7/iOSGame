@@ -10,6 +10,8 @@ import UIKit
 class HomeViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
+    
+    var loadingView: LoadingView?
     var users = [User]()
     
     override func viewDidLoad() {
@@ -43,7 +45,7 @@ class HomeViewController: UIViewController {
     }
     
     @objc private func didReceiveGameRequest(_ notification: Notification) {
-        guard let userInfo = notification.userInfo as? [String:GameRequest] else { return }
+        guard let userInfo = notification.userInfo as? [String: GameRequest] else { return }
         guard let gameRequest = userInfo["GameRequest"] else { return }
         let fromUsername = gameRequest.fromUsername ?? ""
         let alert = UIAlertController(title: "Game Request", message: "\(fromUsername) invited you for a game", preferredStyle: .alert)
@@ -73,7 +75,7 @@ class HomeViewController: UIViewController {
     }
 }
 
-
+// MARK: - UITableViewDataSource
 extension HomeViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         users.count
@@ -88,11 +90,46 @@ extension HomeViewController: UITableViewDataSource {
     }
 }
 
+// MARK: - UserCellDelegate
 extension HomeViewController: UserCellDelegate {
     func requestGameWith(user: User) {
-        guard let userId = user.id else {return}
-        DataStore.shared.startGameRequest(userID: userId) { (request, error) in
-            DataStore.shared.setGameRequestDeletionListener()
+        guard let userId = user.id,
+              let localUser = DataStore.shared.localUser,
+              let localUserId = localUser.id else {return}
+        DataStore.shared.checkForExtistingGame(toUser: userId, fromUser: localUserId) { [weak self] (exists, error) in
+            if let error = error {
+                print(error.localizedDescription)
+                print("Error checking for game, try again later")
+                return
+            }
+            if !exists {
+                DataStore.shared.startGameRequest(userID: userId) { (request, error) in
+                    if request != nil {
+                        DataStore.shared.setGameRequestDeletionListener()
+                        self?.setupLoadingView(me: localUser, opponent: user)
+                    }
+                }
+            }
         }
+    }
+}
+
+// MARK: - LoadingViewHandling
+extension HomeViewController {
+    func setupLoadingView(me: User, opponent: User) {
+        if loadingView != nil {
+            loadingView?.removeFromSuperview()
+            loadingView = nil
+        }
+        loadingView = LoadingView(me: me, opponent: opponent)
+        view.addSubview(loadingView!)
+        loadingView?.snp.makeConstraints({ (make) in
+            make.edges.equalToSuperview()
+        })
+    }
+    
+    func hideLoadingView() {
+        loadingView?.removeFromSuperview()
+        loadingView = nil
     }
 }

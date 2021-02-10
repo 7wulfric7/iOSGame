@@ -33,6 +33,23 @@ extension DataStore {
                            fromUsername: localUser?.username)
     }
     
+    func checkForExtistingGame(toUser: String, fromUser: String, completion: @escaping(_ exists: Bool, _ error: Error?) -> Void ) {
+        let gameRequestRef = database.collection(FirebaseCollections.gameRequests.rawValue)
+            .whereField("from", isEqualTo: fromUser)
+            .whereField("to", isEqualTo: toUser)
+        gameRequestRef.getDocuments { (snapshot, error) in
+            if let error = error {
+                completion(false, error)
+                return
+            }
+            if let snapshot = snapshot, snapshot.documents.count > 0 {
+                completion(true, nil)
+                return
+            }
+            completion(false, nil)
+        }
+    }
+    
     func setGameRequestListener() {
         if gameRequestListener != nil {
             removeGameRequestListener()
