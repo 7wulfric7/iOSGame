@@ -20,7 +20,16 @@ class DataStore {
     static let shared = DataStore()
     let database = Firestore.firestore()
     private let storage = Storage.storage()
-    var localUser: User?
+    var localUser: User? {
+        didSet {
+            if localUser?.avatarImage == nil {
+//                localUser?.avatarImage = avatars.randomElement()
+                localUser?.setRandomImage()
+                guard let localuser = localUser else {return}
+                DataStore.shared.saveUser(user: localuser) { (_, _) in }
+            }
+        }
+    }
     var usersListener: ListenerRegistration?
     var gameRequestListener: ListenerRegistration?
     var gameRequestDeletionListener: ListenerRegistration?
@@ -33,7 +42,12 @@ class DataStore {
                 return
             }
             if let currentUser = result?.user {
-                let localUser = User(id: currentUser.uid, username: "Deniz")
+//                var avatar = "avatarOne"
+//                let avatars = ["avatarOne", "avatarTwo", "avatarThree"]
+//                if let randomAvatar = avatars.randomElement() {
+//                    avatar = randomAvatar
+//                }
+                let localUser = User.createUser(id: currentUser.uid, username: "Deniz")
                 self.saveUser(user: localUser, completion: completion)
             }
         }
