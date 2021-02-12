@@ -9,6 +9,7 @@ import Foundation
 import FirebaseAuth
 import FirebaseFirestore
 import FirebaseFirestoreSwift
+import FirebaseStorage
 
 class DataStore {
     enum FirebaseCollections: String {
@@ -18,6 +19,7 @@ class DataStore {
     
     static let shared = DataStore()
     let database = Firestore.firestore()
+    private let storage = Storage.storage()
     var localUser: User?
     var usersListener: ListenerRegistration?
     var gameRequestListener: ListenerRegistration?
@@ -31,7 +33,7 @@ class DataStore {
                 return
             }
             if let currentUser = result?.user {
-                let localUser = User(id: currentUser.uid, username: "deniz7")
+                let localUser = User(id: currentUser.uid, username: "Deniz")
                 self.saveUser(user: localUser, completion: completion)
             }
         }

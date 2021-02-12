@@ -9,7 +9,11 @@ import UIKit
 import FirebaseAuth
 
 class WelcomeViewController: UIViewController {
-
+    
+    let avatars = ["avatarOne", "avatarTwo", "avatarThree"]
+    var user: User?
+//    var opponent: User?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -30,9 +34,17 @@ class WelcomeViewController: UIViewController {
         DataStore.shared.continueWithGuest { [weak self] (user, error) in
             guard let self = self else { return }
             if let user = user {
-                DataStore.shared.localUser = user
+                self.user = user
+                self.user?.avatarImage = self.setRandomAvatar()
+                DataStore.shared.localUser = self.user
                 self.performSegue(withIdentifier: "homeSeque", sender: nil)
             }
         }
+    }
+    
+    func setRandomAvatar() -> String {
+        let randomAvatar = Int.random(in: 0...avatars.count - 1)
+        let index = randomAvatar
+        return avatars[index]
     }
 }
