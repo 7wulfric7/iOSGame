@@ -82,5 +82,6 @@ class UserTableViewCell: UITableViewCell {
     func setData(user: User) {
         self.user = user
         lblUsername.text = user.username
+        btnStart.isHidden = false
     }
 }

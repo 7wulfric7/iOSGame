@@ -22,6 +22,7 @@
 		2256306B25C86D9D00583452 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2256306A25C86D9D00583452 /* Assets.xcassets */; };
 		2256306E25C86D9D00583452 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2256306C25C86D9D00583452 /* LaunchScreen.storyboard */; };
 		2256307725C86DA800583452 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2256307625C86DA800583452 /* GoogleService-Info.plist */; };
+		227A199125D80F8A00092A5D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227A199025D80F8A00092A5D /* Constants.swift */; };
 		22A739B925CB15DC002697AA /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 22A739B825CB15DC002697AA /* SnapKit */; };
 		22A739BD25CB1C74002697AA /* UITableViewCell+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A739BC25CB1C74002697AA /* UITableViewCell+Extensions.swift */; };
 		22A739C025CB21B4002697AA /* GameRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A739BF25CB21B4002697AA /* GameRequest.swift */; };
@@ -49,6 +50,7 @@
 		2256306D25C86D9D00583452 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2256306F25C86D9D00583452 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2256307625C86DA800583452 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		227A199025D80F8A00092A5D /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		22A739BC25CB1C74002697AA /* UITableViewCell+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+Extensions.swift"; sourceTree = "<group>"; };
 		22A739BF25CB21B4002697AA /* GameRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameRequest.swift; sourceTree = "<group>"; };
 		22A739C225CB2254002697AA /* DataSTore+GameRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DataSTore+GameRequests.swift"; sourceTree = "<group>"; };
@@ -143,6 +145,7 @@
 		2256306025C86D9C00583452 /* iOSGame */ = {
 			isa = PBXGroup;
 			children = (
+				227A198F25D80F7B00092A5D /* Helpers */,
 				2223F16325D4526500BB367C /* Views */,
 				22A739BB25CB1C47002697AA /* Extensions */,
 				2210DE2625C878ED00EC72CF /* Cells */,
@@ -159,6 +162,14 @@
 				2256307625C86DA800583452 /* GoogleService-Info.plist */,
 			);
 			path = iOSGame;
+			sourceTree = "<group>";
+		};
+		227A198F25D80F7B00092A5D /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				227A199025D80F8A00092A5D /* Constants.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		22A739BB25CB1C47002697AA /* Extensions */ = {
@@ -308,6 +319,7 @@
 				2223F16C25D45F4400BB367C /* UIColor.swift in Sources */,
 				2210DE1E25C875AA00EC72CF /* WelcomeViewController.swift in Sources */,
 				2210DE2425C8783F00EC72CF /* UserTableViewCell.swift in Sources */,
+				227A199125D80F8A00092A5D /* Constants.swift in Sources */,
 				2210DE1725C8702000EC72CF /* User.swift in Sources */,
 				22A739C625CB2322002697AA /* Date.swift in Sources */,
 				2210DE2125C875B700EC72CF /* HomeViewController.swift in Sources */,
