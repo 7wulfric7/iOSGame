@@ -13,6 +13,7 @@ struct User: Codable {
     var id: String?
     var username: String?
     var avatarImage: String?
+    var deviceToken: String?
     
 //    init(id: String, username: String, avatarImage: String) {
 //        self.id = id
