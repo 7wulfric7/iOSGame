@@ -15,6 +15,7 @@ class DataStore {
     enum FirebaseCollections: String {
         case users
         case gameRequests
+        case games
     }
     
     static let shared = DataStore()
@@ -30,9 +31,12 @@ class DataStore {
             }
         }
     }
+    
     var usersListener: ListenerRegistration?
     var gameRequestListener: ListenerRegistration?
     var gameRequestDeletionListener: ListenerRegistration?
+    var gameListener: ListenerRegistration?
+    
     init() {}
     
     func continueWithGuest(completion: @escaping (_ user: User?, _ error: Error?) -> Void) {

@@ -85,11 +85,43 @@
                     <navigationItem key="navigationItem" id="dDB-Py-7JW"/>
                     <connections>
                         <outlet property="tableView" destination="sA2-nn-9so" id="9WF-pw-3lI"/>
+                        <segue destination="swD-vT-5R4" kind="show" identifier="gameSeque" id="TZh-rb-Iqr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bK6-Lm-kqH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="892.75362318840587" y="10.714285714285714"/>
+        </scene>
+        <!--Game View Controller-->
+        <scene sceneID="Jgv-HT-VZA">
+            <objects>
+                <viewController id="swD-vT-5R4" customClass="GameViewController" customModule="iOSGame" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Tq8-JQ-Hsi">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HF9-Yn-qit">
+                                <rect key="frame" x="20" y="110" width="41.5" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="7Xi-R5-JH8"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="HF9-Yn-qit" firstAttribute="top" secondItem="7Xi-R5-JH8" secondAttribute="top" constant="66" id="LHA-mx-UFb"/>
+                            <constraint firstItem="HF9-Yn-qit" firstAttribute="leading" secondItem="7Xi-R5-JH8" secondAttribute="leading" constant="20" id="vka-YF-PvH"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="ck0-yM-9XS"/>
+                    <connections>
+                        <outlet property="lblGameStatus" destination="HF9-Yn-qit" id="BJS-j5-UyY"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fze-D0-iV1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1644.9275362318842" y="10.714285714285714"/>
         </scene>
     </scenes>
     <resources>
