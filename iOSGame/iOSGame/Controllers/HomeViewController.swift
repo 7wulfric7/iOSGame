@@ -10,6 +10,10 @@ import UIKit
 class HomeViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var tableHolderView: UIView!
+    @IBOutlet weak var btnExpand: UIButton!
+    @IBOutlet weak var tableHolderBottomConstraint: NSLayoutConstraint!
+    
     
     var loadingView: LoadingView?
     var users = [User]()
@@ -38,6 +42,10 @@ class HomeViewController: UIViewController {
         super.viewWillDisappear(animated)
         DataStore.shared.removeUsersListener()
         DataStore.shared.removeGameRequestListener()
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .darkContent
     }
     
     private func requestPushNotifications() {
@@ -107,6 +115,25 @@ class HomeViewController: UIViewController {
         DataStore.shared.removeGameListener()
         performSegue(withIdentifier: "gameSeque", sender: game)
     }
+    
+    
+    @IBAction func onExpand(_ sender: UIButton) {
+        let isExpanded = tableHolderBottomConstraint.constant == 0
+        tableHolderBottomConstraint.constant = isExpanded ? tableHolderView.frame.height : 0
+        self.btnExpand.setImage(UIImage(named: isExpanded ? "ButtonUp" : "ButtonDown"), for: .normal)
+        UIView.animate(withDuration: 0.5, delay: 0.0, options: [.curveEaseInOut]) {
+            self.view.layoutIfNeeded()
+            // Animating frames instead of contraints:
+//            self.tableHolderView.frame.origin = CGPoint(x: self.tableHolderView.frame.origin.x, y: -self.tableHolderView.frame.size.height)
+        } completion: { completed in
+            if completed {
+                // animation is completed
+                
+            }
+        }
+
+    }
+    
 }
 //MARK: = Navigation
 extension HomeViewController {
