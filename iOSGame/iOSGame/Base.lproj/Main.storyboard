@@ -81,12 +81,12 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Osc-Wp-Zz8">
                                         <rect key="frame" x="0.0" y="55" width="414" height="421"/>
                                         <subviews>
-                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="sA2-nn-9so">
+                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="sA2-nn-9so">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="421"/>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <color key="backgroundColor" red="0.96078431369999995" green="0.97254901959999995" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
                                             </tableView>
                                         </subviews>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="backgroundColor" red="0.96078431369999995" green="0.97254901959999995" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstItem="sA2-nn-9so" firstAttribute="leading" secondItem="Osc-Wp-Zz8" secondAttribute="leading" id="2KX-yt-hwC"/>
                                             <constraint firstAttribute="trailing" secondItem="sA2-nn-9so" secondAttribute="trailing" id="Kq2-WB-TW4"/>
@@ -142,7 +142,7 @@
                                         </constraints>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" red="0.96078431369999995" green="0.97254901959999995" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="Osc-Wp-Zz8" firstAttribute="leading" secondItem="yiT-gq-Nwo" secondAttribute="leading" id="3Ot-a0-mqA"/>
                                     <constraint firstAttribute="trailing" secondItem="avj-UR-Eri" secondAttribute="trailing" id="4G3-t7-bvG"/>
