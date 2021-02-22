@@ -98,6 +98,7 @@ class HomeViewController: UIViewController {
             }
             if let user = user {
                 DataStore.shared.createGame(players:[localUser, user]) { (game, error) in
+                    DataStore.shared.deleteGameRequest(gameRequest: gameRequest)
                     if let error = error {
                         print(error.localizedDescription)
                         return

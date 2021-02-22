@@ -10,25 +10,24 @@ import FirebaseAuth
 
 class WelcomeViewController: UIViewController {
     
+    @IBOutlet weak var txtUserName: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        txtUserName.layer.cornerRadius = 10
+        txtUserName.layer.masksToBounds = true
+        txtUserName.returnKeyType = .continue
+        txtUserName.delegate = self
    
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        txtUserName.becomeFirstResponder()
+    }
     @IBAction func onContinue(_ sender: UIButton) {
-        if Auth.auth().currentUser != nil, let id = Auth.auth().currentUser?.tenantID {
-            DataStore.shared.getUserWith(id: id) { [weak self] (user, error) in
-                guard let self = self else { return }
-                if let user = user {
-                    DataStore.shared.localUser = user
-                    self.performSegue(withIdentifier: "homeSeque", sender: nil)
-                }
-                try! Auth.auth().signOut()
-            }
-            return
-        }
-        DataStore.shared.continueWithGuest { [weak self] (user, error) in
+        guard let username = txtUserName.text else { return }
+        DataStore.shared.continueWithGuest(username: username) { [weak self] (user, error) in
             guard let self = self else { return }
             if let user = user {
                 DataStore.shared.localUser = user
@@ -37,4 +36,11 @@ class WelcomeViewController: UIViewController {
         }
     }
     
+}
+
+extension WelcomeViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
 }

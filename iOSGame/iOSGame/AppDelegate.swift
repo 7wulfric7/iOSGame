@@ -11,13 +11,14 @@ import UserNotificationsUI
 import FirebaseMessaging
 
 @main
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         FirebaseApp.configure()
         UNUserNotificationCenter.current().delegate = self
         UIApplication.shared.applicationIconBadgeNumber = 0
+        Messaging.messaging().delegate = self
         return true
     }
     
@@ -41,7 +42,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print("Device token: \(token)")
       //  :point_up: When you need to transfer the dataToken to String
         Messaging.messaging().apnsToken = deviceToken
-        saveTokenForUser(deviceToken: token)
     }
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
@@ -76,6 +76,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 UIApplication.shared.registerForRemoteNotifications()
             }
         }
+    }
+    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
+        saveTokenForUser(deviceToken: fcmToken)
     }
     
 }

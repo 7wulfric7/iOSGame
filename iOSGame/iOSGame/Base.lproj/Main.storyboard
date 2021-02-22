@@ -17,12 +17,45 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="UQn-ie-fXS" kind="relationship" relationship="rootViewController" id="lsV-rh-9Pk"/>
+                        <segue destination="Ens-FL-vn0" kind="relationship" relationship="rootViewController" id="x3E-At-idT"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gEB-Lh-iHi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-659" y="12"/>
+            <point key="canvasLocation" x="-1033" y="21"/>
+        </scene>
+        <!--Splash View Controller-->
+        <scene sceneID="6FL-W3-nUi">
+            <objects>
+                <viewController id="Ens-FL-vn0" customClass="SplashViewController" customModule="iOSGame" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="M42-OI-nrr">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SplashScreenGroup" translatesAutoresizingMaskIntoConstraints="NO" id="uZi-WI-XWJ">
+                                <rect key="frame" x="-123" y="290" width="660" height="316"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="660" id="BJX-MR-86y"/>
+                                    <constraint firstAttribute="height" constant="316" id="hJe-CU-aLx"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="4Ml-ly-xV3"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="uZi-WI-XWJ" firstAttribute="centerX" secondItem="M42-OI-nrr" secondAttribute="centerX" id="kM8-xO-yJY"/>
+                            <constraint firstItem="uZi-WI-XWJ" firstAttribute="centerY" secondItem="M42-OI-nrr" secondAttribute="centerY" id="wSW-l5-eez"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="lNj-oV-UxL"/>
+                    <connections>
+                        <segue destination="UQn-ie-fXS" kind="show" identifier="welcomeSegue" id="cZ7-ET-IYF"/>
+                        <segue destination="swM-e0-lGH" kind="show" identifier="homeSegue" id="SOu-jd-SHg"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SbN-dh-Mnn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-249" y="21"/>
         </scene>
         <!--Welcome View Controller-->
         <scene sceneID="eRx-Tv-ugk">
@@ -32,33 +65,57 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gradientBackground" translatesAutoresizingMaskIntoConstraints="NO" id="GS3-jM-vqB">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KX8-Fm-OzP">
                                 <rect key="frame" x="157" y="423" width="100" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="2qW-bq-VAh"/>
                                     <constraint firstAttribute="height" constant="50" id="d21-JP-mEk"/>
                                 </constraints>
-                                <state key="normal" title="Continue"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <state key="normal" title="Continue">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
                                 <connections>
                                     <action selector="onContinue:" destination="UQn-ie-fXS" eventType="touchUpInside" id="Kvz-LH-zk3"/>
                                 </connections>
                             </button>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Pick your username" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="m0V-97-1GD">
+                                <rect key="frame" x="40" y="333" width="334" height="40"/>
+                                <color key="backgroundColor" red="0.96078431372549022" green="0.97254901960784312" blue="0.98039215686274506" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="qvw-py-FXk"/>
+                                </constraints>
+                                <color key="textColor" red="0.20784313730000001" green="0.27058823529999998" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="18"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Dt5-i4-klk"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" red="0.20784313725490194" green="0.27058823529411763" blue="0.78431372549019607" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="KX8-Fm-OzP" firstAttribute="centerX" secondItem="D4c-kg-aK7" secondAttribute="centerX" id="0KZ-Z1-3ZC"/>
+                            <constraint firstItem="Dt5-i4-klk" firstAttribute="trailing" secondItem="m0V-97-1GD" secondAttribute="trailing" constant="40" id="5Mo-bZ-ryX"/>
+                            <constraint firstItem="m0V-97-1GD" firstAttribute="leading" secondItem="Dt5-i4-klk" secondAttribute="leading" constant="40" id="77U-qG-xk0"/>
+                            <constraint firstItem="GS3-jM-vqB" firstAttribute="leading" secondItem="D4c-kg-aK7" secondAttribute="leading" id="dji-Vz-ISU"/>
+                            <constraint firstAttribute="trailing" secondItem="GS3-jM-vqB" secondAttribute="trailing" id="gsO-sr-sI8"/>
+                            <constraint firstItem="KX8-Fm-OzP" firstAttribute="top" secondItem="m0V-97-1GD" secondAttribute="bottom" constant="50" id="jFF-Qn-OpO"/>
+                            <constraint firstItem="GS3-jM-vqB" firstAttribute="top" secondItem="D4c-kg-aK7" secondAttribute="top" id="pT4-Tb-j1l"/>
                             <constraint firstItem="KX8-Fm-OzP" firstAttribute="centerY" secondItem="D4c-kg-aK7" secondAttribute="centerY" id="ptP-2e-PdE"/>
+                            <constraint firstAttribute="bottom" secondItem="GS3-jM-vqB" secondAttribute="bottom" id="xft-Tj-a6Q"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="RL0-o2-1ly"/>
                     <connections>
+                        <outlet property="txtUserName" destination="m0V-97-1GD" id="CrV-GS-UcQ"/>
                         <segue destination="swM-e0-lGH" kind="show" identifier="homeSeque" id="loh-mF-12a"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sxj-N8-gVw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="117" y="11"/>
+            <point key="canvasLocation" x="541" y="-190"/>
         </scene>
         <!--Home View Controller-->
         <scene sceneID="TCb-co-D0u">
@@ -176,7 +233,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bK6-Lm-kqH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="892.75362318840587" y="10.714285714285714"/>
+            <point key="canvasLocation" x="542" y="601"/>
         </scene>
         <!--Game View Controller-->
         <scene sceneID="Jgv-HT-VZA">
@@ -207,13 +264,18 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fze-D0-iV1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1644.9275362318842" y="10.714285714285714"/>
+            <point key="canvasLocation" x="1399" y="21"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="loh-mF-12a"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="ButtonDown" width="50" height="50"/>
         <image name="ButtonUp" width="50" height="50"/>
         <image name="HomeImage" width="652" height="323.5"/>
+        <image name="SplashScreenGroup" width="660" height="317"/>
+        <image name="gradientBackground" width="375" height="812"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

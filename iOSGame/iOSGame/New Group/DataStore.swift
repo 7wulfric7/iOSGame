@@ -10,6 +10,7 @@ import FirebaseAuth
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 import FirebaseStorage
+import FirebaseMessaging
 
 class DataStore {
     enum FirebaseCollections: String {
@@ -23,14 +24,17 @@ class DataStore {
     private let storage = Storage.storage()
     var localUser: User? {
         didSet {
-            if localUser?.avatarImage == nil {
+//            if localUser?.avatarImage == nil {
 //                localUser?.avatarImage = avatars.randomElement()
                 localUser?.setRandomImage()
+                if localUser?.deviceToken == nil {
+                    setPushToken()
+                }
                 guard let localuser = localUser else {return}
                 DataStore.shared.saveUser(user: localuser) { (_, _) in }
             }
         }
-    }
+    
     
     var usersListener: ListenerRegistration?
     var gameRequestListener: ListenerRegistration?
@@ -39,7 +43,20 @@ class DataStore {
     
     init() {}
     
-    func continueWithGuest(completion: @escaping (_ user: User?, _ error: Error?) -> Void) {
+    func setPushToken() {
+        Messaging.messaging().token { token, error in
+          if let error = error {
+            print("Error fetching FCM registration token: \(error)")
+          } else if let token = token {
+            print("FCM registration token: \(token)")
+            self.localUser?.deviceToken = token
+            self.saveUser(user: self.localUser!) { (_, _) in
+                
+            }
+          }
+        }
+    }
+    func continueWithGuest(username: String, completion: @escaping (_ user: User?, _ error: Error?) -> Void) {
         Auth.auth().signInAnonymously { (result, error) in
             if let error = error {
                 completion(nil, error)
@@ -51,7 +68,7 @@ class DataStore {
 //                if let randomAvatar = avatars.randomElement() {
 //                    avatar = randomAvatar
 //                }
-                let localUser = User.createUser(id: currentUser.uid, username: "Deniz")
+                let localUser = User.createUser(id: currentUser.uid, username: username)
                 self.saveUser(user: localUser, completion: completion)
             }
         }
