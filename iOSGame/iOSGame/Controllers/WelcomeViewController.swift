@@ -24,6 +24,7 @@ class WelcomeViewController: UIViewController {
                     DataStore.shared.localUser = user
                     self.performSegue(withIdentifier: "homeSeque", sender: nil)
                 }
+                try! Auth.auth().signOut()
             }
             return
         }

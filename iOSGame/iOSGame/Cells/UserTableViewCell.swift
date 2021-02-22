@@ -17,21 +17,23 @@ class UserTableViewCell: UITableViewCell {
 //    @IBOutlet weak var lblUserName: UILabel!
 //    @IBOutlet weak var btnStart: UIButton!
 // SnapKit with code:
-    private lazy var activityIndicator: UIActivityIndicatorView = {
-        let activity = UIActivityIndicatorView(style: .medium)
-        activity.color = .red
-        return activity
-    }()
+//    private lazy var activityIndicator: UIActivityIndicatorView = {
+//        let activity = UIActivityIndicatorView(style: .medium)
+//        activity.color = .red
+//        return activity
+//    }()
     
     private lazy var backgroundImage: UIView = {
         let imageView = UIView()
-        imageView.layer.backgroundColor = UIColor.white.cgColor
+        imageView.backgroundColor = .white
         imageView.layer.cornerRadius = 20
         return imageView
     }()
     
     private lazy var userImage: UIImageView = {
         let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFit
+        imageView.clipsToBounds = true
         return imageView
     }()
     
@@ -74,20 +76,19 @@ class UserTableViewCell: UITableViewCell {
         contentView.addSubview(userImage)
         contentView.addSubview(lblUsername)
         contentView.addSubview(btnStart)
-        contentView.addSubview(activityIndicator)
         contentView.layer.backgroundColor = UIColor(hex: "F5F8FA").cgColor
-        activityIndicator.isHidden = true
+//        contentView.addSubview(activityIndicator)
+//        activityIndicator.isHidden = true
         backgroundImage.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(10)
-            make.trailing.equalToSuperview().inset(10)
-            make.top.equalToSuperview().offset(10)
+            make.leading.trailing.equalToSuperview().inset(16)
+            make.top.equalToSuperview().offset(12)
             make.bottom.equalToSuperview()
         }
         userImage.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(20)
+            make.leading.equalTo(backgroundImage).offset(20)
             make.top.bottom.equalTo(backgroundImage)
             make.width.equalTo(45)
-            make.height.equalTo(50)
+//            make.height.equalTo(50)
         }
         lblUsername.snp.makeConstraints { make in
             make.leading.equalTo(userImage.snp.trailing).offset(20)
@@ -95,28 +96,30 @@ class UserTableViewCell: UITableViewCell {
             make.trailing.equalTo(btnStart.snp.leading).inset(10)
         }
         btnStart.snp.makeConstraints { make in
-            make.top.bottom.equalTo(backgroundImage).inset(2)
-            make.trailing.equalToSuperview().inset(20)
+            make.top.bottom.equalTo(backgroundImage).inset(18)
+            make.trailing.equalTo(backgroundImage).inset(20)
             make.width.equalTo(50)
             make.height.equalTo(50)
         }
-        activityIndicator.snp.makeConstraints { make in
-            make.center.equalTo(btnStart)
-        }
+//        activityIndicator.snp.makeConstraints { make in
+//            make.center.equalTo(btnStart)
+//        }
     }
     
     @objc private func onSart() {
         guard let user = user else { return }
         delegate?.requestGameWith(user: user)
         btnStart.isHidden = true
-        activityIndicator.isHidden = false
-        activityIndicator.startAnimating()
+//        activityIndicator.isHidden = false
+//        activityIndicator.startAnimating()
     }
     func setData(user: User) {
         self.user = user
         lblUsername.text = user.username?.uppercased()
         if let avatar = user.avatarImage {
             userImage.image = UIImage(named: avatar)
+        } else {
+            userImage.image = UIImage(named: "avatarOne")
         }
         btnStart.isHidden = false
     }
