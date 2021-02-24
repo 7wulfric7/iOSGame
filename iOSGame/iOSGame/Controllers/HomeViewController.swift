@@ -111,9 +111,16 @@ class HomeViewController: UIViewController {
         }
     }
     
-    private func enterGame(_ game: Game) {
+    private func enterGame(_ game: Game,_ shouldUpdateGame: Bool = false) {
         DataStore.shared.removeGameListener()
-        performSegue(withIdentifier: "gameSeque", sender: game)
+        if shouldUpdateGame {
+            var newGame = game
+            newGame.state = .inprogress
+            DataStore.shared.updateGameStatus(game: newGame)
+            performSegue(withIdentifier: "gameSeque", sender: newGame)
+        } else {
+            performSegue(withIdentifier: "gameSeque", sender: game)
+        }
     }
     
     
@@ -123,7 +130,7 @@ class HomeViewController: UIViewController {
         self.btnExpand.setImage(UIImage(named: isExpanded ? "ButtonUp" : "ButtonDown"), for: .normal)
         UIView.animate(withDuration: 0.5, delay: 0.0, options: [.curveEaseInOut]) {
             self.view.layoutIfNeeded()
-            // Animating frames instead of contraints:
+            // Animating frames instead of constraints:
             //            self.tableHolderView.frame.origin = CGPoint(x: self.tableHolderView.frame.origin.x, y: -self.tableHolderView.frame.size.height)
         } completion: { completed in
             if completed {
@@ -191,7 +198,7 @@ extension HomeViewController {
         }
         loadingView = LoadingView(me: me, opponent: opponent, request: request)
         loadingView?.gameAccepted = { [weak self] game in
-            self?.enterGame(game)
+            self?.enterGame(game, true)
         }
         view.addSubview(loadingView!)
         loadingView?.snp.makeConstraints({ (make) in

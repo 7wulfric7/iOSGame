@@ -269,15 +269,24 @@
                                     <action selector="onClose:" destination="swD-vT-5R4" eventType="touchUpInside" id="4tc-Ey-N1h"/>
                                 </connections>
                             </button>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gameBackground" translatesAutoresizingMaskIntoConstraints="NO" id="cK5-z7-cfu">
+                                <rect key="frame" x="0.0" y="245.5" width="414" height="405"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="405" id="37z-4W-mRX"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="7Xi-R5-JH8"/>
                         <color key="backgroundColor" red="0.20784313730000001" green="0.27058823529999998" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="z3r-KY-QVz" firstAttribute="top" secondItem="7Xi-R5-JH8" secondAttribute="top" id="77K-AE-15v"/>
                             <constraint firstItem="7Xi-R5-JH8" firstAttribute="trailing" secondItem="AIg-vY-0AF" secondAttribute="trailing" id="BMu-c4-RzK"/>
+                            <constraint firstItem="cK5-z7-cfu" firstAttribute="centerY" secondItem="Tq8-JQ-Hsi" secondAttribute="centerY" id="EKf-Jw-01I"/>
                             <constraint firstItem="HF9-Yn-qit" firstAttribute="top" secondItem="7Xi-R5-JH8" secondAttribute="top" constant="66" id="LHA-mx-UFb"/>
                             <constraint firstItem="AIg-vY-0AF" firstAttribute="top" secondItem="Tq8-JQ-Hsi" secondAttribute="top" id="PEQ-AY-vLW"/>
                             <constraint firstItem="AIg-vY-0AF" firstAttribute="leading" secondItem="7Xi-R5-JH8" secondAttribute="leading" id="YjV-x3-hyN"/>
+                            <constraint firstItem="cK5-z7-cfu" firstAttribute="leading" secondItem="7Xi-R5-JH8" secondAttribute="leading" id="ec0-5t-tx5"/>
+                            <constraint firstItem="7Xi-R5-JH8" firstAttribute="trailing" secondItem="cK5-z7-cfu" secondAttribute="trailing" id="khe-WZ-OPy"/>
                             <constraint firstItem="7Xi-R5-JH8" firstAttribute="trailing" secondItem="z3r-KY-QVz" secondAttribute="trailing" constant="20" id="qzI-y5-4bv"/>
                             <constraint firstAttribute="bottom" secondItem="AIg-vY-0AF" secondAttribute="bottom" id="uKr-Ke-4hR"/>
                             <constraint firstItem="HF9-Yn-qit" firstAttribute="leading" secondItem="7Xi-R5-JH8" secondAttribute="leading" constant="20" id="vka-YF-PvH"/>
@@ -301,6 +310,7 @@
         <image name="ButtonUp" width="50" height="50"/>
         <image name="HomeImage" width="652" height="323.5"/>
         <image name="SplashScreenGroup" width="660" height="317"/>
+        <image name="gameBackground" width="413" height="408"/>
         <image name="gradientBackground" width="375" height="812"/>
         <image name="xmark" catalog="system" width="128" height="113"/>
         <systemColor name="systemBackgroundColor">

@@ -112,10 +112,10 @@
 		2210DE1C25C8759100EC72CF /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				22D0ED9D25E436940032D939 /* SplashViewController.swift */,
 				2210DE1D25C875AA00EC72CF /* WelcomeViewController.swift */,
 				2210DE2025C875B700EC72CF /* HomeViewController.swift */,
 				2272CCC725DD99350007C56A /* GameViewController.swift */,
-				22D0ED9D25E436940032D939 /* SplashViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";

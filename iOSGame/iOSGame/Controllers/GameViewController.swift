@@ -15,8 +15,23 @@ class GameViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setGameStatusListener()
+        
+        lblGameStatus.text = game?.state.rawValue
+    }
 
-       
+    private func setGameStatusListener() {
+        guard let game = game else { return }
+        DataStore.shared.setGameStateListener(game: game) { [weak self] (updatedGame, error) in
+            if let updatedGame = updatedGame {
+                self?.updateGame(updatedGame: updatedGame)
+            }
+        }
+    }
+    
+    private func updateGame(updatedGame: Game) {
+        lblGameStatus.text = updatedGame.state.rawValue
+        game = updatedGame
     }
     
     @IBAction func onClose(_ sender: UIButton) {

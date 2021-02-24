@@ -41,6 +41,7 @@ class DataStore {
     var gameRequestListener: ListenerRegistration?
     var gameRequestDeletionListener: ListenerRegistration?
     var gameListener: ListenerRegistration?
+    var gameStatusListener: ListenerRegistration?
     
     init() {}
     
