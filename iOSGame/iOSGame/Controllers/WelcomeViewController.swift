@@ -31,8 +31,8 @@ class WelcomeViewController: UIViewController {
     }
     
     @IBAction func onContinue(_ sender: UIButton) {
-        let alert = UIAlertController(title: "Error", message: "Username already in use", preferredStyle: .alert)
-        let confirm = UIAlertAction(title: "Ok", style: .default, handler: nil)
+        let alert = UIAlertController(title: "Username already in use", message: "Please enter another username", preferredStyle: .alert)
+        let confirm = UIAlertAction(title: "OK", style: .default, handler: nil)
         guard let username = txtUserName.text else { return }
         DataStore.shared.continueWithGuest(username: username) { [weak self] (user, error) in
             guard let self = self else { return }
