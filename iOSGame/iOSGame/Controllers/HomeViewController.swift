@@ -8,7 +8,7 @@
 import UIKit
 
 class HomeViewController: UIViewController {
-
+    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var tableHolderView: UIView!
     @IBOutlet weak var btnExpand: UIButton!
@@ -24,9 +24,9 @@ class HomeViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(didReceiveGameRequest(_:)), name: Notification.Name("DidReceiveGameRequestNotification"), object: nil)
         setupTable()
         getUsers()
-//        DataStore.shared.setUsersListener {
-//            self.getUsers()
-//        }
+        //        DataStore.shared.setUsersListener {
+        //            self.getUsers()
+        //        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -44,11 +44,7 @@ class HomeViewController: UIViewController {
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        if loadingView != nil {
-            return .lightContent
-        } else {
-            return .darkContent
-        }
+        return .darkContent
     }
     
     private func requestPushNotifications() {
@@ -109,7 +105,7 @@ class HomeViewController: UIViewController {
                     if let game = game {
                         self?.enterGame(game)
                     }
-                   
+                    
                 }
             }
         }
@@ -128,14 +124,14 @@ class HomeViewController: UIViewController {
         UIView.animate(withDuration: 0.5, delay: 0.0, options: [.curveEaseInOut]) {
             self.view.layoutIfNeeded()
             // Animating frames instead of contraints:
-//            self.tableHolderView.frame.origin = CGPoint(x: self.tableHolderView.frame.origin.x, y: -self.tableHolderView.frame.size.height)
+            //            self.tableHolderView.frame.origin = CGPoint(x: self.tableHolderView.frame.origin.x, y: -self.tableHolderView.frame.size.height)
         } completion: { completed in
             if completed {
                 // animation is completed
                 
             }
         }
-
+        
     }
     
 }
