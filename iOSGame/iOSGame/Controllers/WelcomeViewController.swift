@@ -30,18 +30,26 @@ class WelcomeViewController: UIViewController {
         return .lightContent
     }
     
+    func showErrorAlert(username: String) {
+        let alert = UIAlertController(title: "Error", message: "\(username) already in use. Please enter another username", preferredStyle: .alert)
+        let confirm = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+        alert.addAction(confirm)
+        self.present(alert, animated: true, completion: nil)
+    }
+    
     @IBAction func onContinue(_ sender: UIButton) {
-        let alert = UIAlertController(title: "Username already in use", message: "Please enter another username", preferredStyle: .alert)
-        let confirm = UIAlertAction(title: "OK", style: .default, handler: nil)
-        guard let username = txtUserName.text else { return }
-        DataStore.shared.continueWithGuest(username: username) { [weak self] (user, error) in
-            guard let self = self else { return }
-            if let user = user {
-                DataStore.shared.localUser = user
-                self.performSegue(withIdentifier: "homeSeque", sender: nil)
-            } else {
-                alert.addAction(confirm)
-                self.present(alert, animated: true, completion: nil)
+        guard let username = txtUserName.text?.lowercased() else { return }
+        DataStore.shared.checkForExistingUsername(username) { [weak self] (exists, _) in
+            if exists {
+                self?.showErrorAlert(username: username)
+                return
+            }
+            DataStore.shared.continueWithGuest(username: username) { [weak self] (user, error) in
+                guard let self = self else { return }
+                if let user = user {
+                    DataStore.shared.localUser = user
+                    self.performSegue(withIdentifier: "homeSeque", sender: nil)
+                }
             }
         }
     }

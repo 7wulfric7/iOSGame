@@ -58,28 +58,27 @@ class DataStore {
         }
     }
     
+    func checkForExistingUsername(_ username: String, _ completion: @escaping(_ exists: Bool, _ error: Error?) -> Void) {
+        let usersRef = database.collection(FirebaseCollections.users.rawValue).whereField("username", isEqualTo: username)
+        usersRef.getDocuments { (snapshot, error) in
+            if let snapshot = snapshot, snapshot.documents.count == 0 {
+                // we don't have users with the same username
+                completion(false, nil)
+                return
+            }
+            completion(true, error)
+        }
+    }
+    
     func continueWithGuest(username: String, completion: @escaping (_ user: User?, _ error: Error?) -> Void) {
         Auth.auth().signInAnonymously { (result, error) in
             if let error = error {
                 completion(nil, error)
                 return
             }
-            let usernameRef = self.database.collection(FirebaseCollections.users.rawValue).whereField("username", isEqualTo: username)
-            usernameRef.getDocuments { (document, error) in
-                if let document = document, document.count > 0 {
-                    completion(nil, error)
-                    return
-                } else {
-                    if let currentUser = result?.user {
-                        //                var avatar = "avatarOne"
-                        //                let avatars = ["avatarOne", "avatarTwo", "avatarThree"]
-                        //                if let randomAvatar = avatars.randomElement() {
-                        //                    avatar = randomAvatar
-                        //                }
-                        let localUser = User.createUser(id: currentUser.uid, username: username)
-                        self.saveUser(user: localUser, completion: completion)
-                    }
-                }
+            if let currentUser = result?.user {
+                let localUser = User.createUser(id: currentUser.uid, username: username)
+                self.saveUser(user: localUser, completion: completion)
             }
         }
     }
