@@ -9,7 +9,7 @@ import UIKit
 import Firebase
 
 class SplashViewController: UIViewController {
-    
+    private var user: User?
     override func viewDidLoad() {
         super.viewDidLoad()
         checkForUser()

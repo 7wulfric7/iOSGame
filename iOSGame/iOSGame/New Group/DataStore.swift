@@ -11,6 +11,7 @@ import FirebaseFirestore
 import FirebaseFirestoreSwift
 import FirebaseStorage
 import FirebaseMessaging
+import Firebase
 
 class DataStore {
     enum FirebaseCollections: String {
@@ -24,16 +25,16 @@ class DataStore {
     private let storage = Storage.storage()
     var localUser: User? {
         didSet {
-//            if localUser?.avatarImage == nil {
-//                localUser?.avatarImage = avatars.randomElement()
-                localUser?.setRandomImage()
-                if localUser?.deviceToken == nil {
-                    setPushToken()
-                }
-                guard let localuser = localUser else {return}
-                DataStore.shared.saveUser(user: localuser) { (_, _) in }
+            //            if localUser?.avatarImage == nil {
+            //                localUser?.avatarImage = avatars.randomElement()
+            localUser?.setRandomImage()
+            if localUser?.deviceToken == nil {
+                setPushToken()
             }
+            guard let localuser = localUser else {return}
+            DataStore.shared.saveUser(user: localuser) { (_, _) in }
         }
+    }
     
     
     var usersListener: ListenerRegistration?
@@ -45,31 +46,40 @@ class DataStore {
     
     func setPushToken() {
         Messaging.messaging().token { token, error in
-          if let error = error {
-            print("Error fetching FCM registration token: \(error)")
-          } else if let token = token {
-            print("FCM registration token: \(token)")
-            self.localUser?.deviceToken = token
-            self.saveUser(user: self.localUser!) { (_, _) in
-                
+            if let error = error {
+                print("Error fetching FCM registration token: \(error)")
+            } else if let token = token {
+                print("FCM registration token: \(token)")
+                self.localUser?.deviceToken = token
+                self.saveUser(user: self.localUser!) { (_, _) in
+                    
+                }
             }
-          }
         }
     }
+    
     func continueWithGuest(username: String, completion: @escaping (_ user: User?, _ error: Error?) -> Void) {
         Auth.auth().signInAnonymously { (result, error) in
             if let error = error {
                 completion(nil, error)
                 return
             }
-            if let currentUser = result?.user {
-//                var avatar = "avatarOne"
-//                let avatars = ["avatarOne", "avatarTwo", "avatarThree"]
-//                if let randomAvatar = avatars.randomElement() {
-//                    avatar = randomAvatar
-//                }
-                let localUser = User.createUser(id: currentUser.uid, username: username)
-                self.saveUser(user: localUser, completion: completion)
+            let usernameRef = self.database.collection(FirebaseCollections.users.rawValue).whereField("username", isEqualTo: username)
+            usernameRef.getDocuments { (document, error) in
+                if let document = document, document.count > 0 {
+                    completion(nil, error)
+                    return
+                } else {
+                    if let currentUser = result?.user {
+                        //                var avatar = "avatarOne"
+                        //                let avatars = ["avatarOne", "avatarTwo", "avatarThree"]
+                        //                if let randomAvatar = avatars.randomElement() {
+                        //                    avatar = randomAvatar
+                        //                }
+                        let localUser = User.createUser(id: currentUser.uid, username: username)
+                        self.saveUser(user: localUser, completion: completion)
+                    }
+                }
             }
         }
     }

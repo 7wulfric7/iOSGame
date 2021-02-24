@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 
 class LoadingView: UIView {
-
+    
     private lazy var avatarMe: AvatarView = {
         let avatar = AvatarView(state: .lodaing)
         return avatar

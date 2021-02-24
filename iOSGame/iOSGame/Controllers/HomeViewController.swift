@@ -14,7 +14,6 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var btnExpand: UIButton!
     @IBOutlet weak var tableHolderBottomConstraint: NSLayoutConstraint!
     
-    
     var loadingView: LoadingView?
     var users = [User]()
     
@@ -45,7 +44,11 @@ class HomeViewController: UIViewController {
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .darkContent
+        if loadingView != nil {
+            return .lightContent
+        } else {
+            return .darkContent
+        }
     }
     
     private func requestPushNotifications() {

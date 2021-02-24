@@ -115,7 +115,7 @@ class UserTableViewCell: UITableViewCell {
     }
     func setData(user: User) {
         self.user = user
-        lblUsername.text = user.username?.uppercased()
+        lblUsername.text = user.username
         if let avatar = user.avatarImage {
             userImage.image = UIImage(named: avatar)
         } else {

@@ -18,24 +18,33 @@ class WelcomeViewController: UIViewController {
         txtUserName.layer.masksToBounds = true
         txtUserName.returnKeyType = .continue
         txtUserName.delegate = self
-   
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         txtUserName.becomeFirstResponder()
     }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
     @IBAction func onContinue(_ sender: UIButton) {
+        let alert = UIAlertController(title: "Error", message: "Username already in use", preferredStyle: .alert)
+        let confirm = UIAlertAction(title: "Ok", style: .default, handler: nil)
         guard let username = txtUserName.text else { return }
         DataStore.shared.continueWithGuest(username: username) { [weak self] (user, error) in
             guard let self = self else { return }
             if let user = user {
                 DataStore.shared.localUser = user
                 self.performSegue(withIdentifier: "homeSeque", sender: nil)
+            } else {
+                alert.addAction(confirm)
+                self.present(alert, animated: true, completion: nil)
             }
         }
     }
-    
 }
 
 extension WelcomeViewController: UITextFieldDelegate {
