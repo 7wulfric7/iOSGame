@@ -57,6 +57,7 @@ class UserTableViewCell: UITableViewCell {
         button.addTarget(self, action: #selector(onSart), for: .touchUpInside)
         return button
     }()
+    
     private var user: User?
     weak var delegate: UserCellDelegate?
     

@@ -16,6 +16,7 @@ class HomeViewController: UIViewController {
     
     var loadingView: LoadingView?
     var users = [User]()
+    var game: Game?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -167,21 +168,39 @@ extension HomeViewController: UITableViewDataSource {
 
 // MARK: - UserCellDelegate
 extension HomeViewController: UserCellDelegate {
+    
     func requestGameWith(user: User) {
         guard let userId = user.id,
+              let username = user.username,
               let localUser = DataStore.shared.localUser,
+              let playerId = game?.playerIds,
+              let state = game?.state,
               let localUserId = localUser.id else {return}
-        DataStore.shared.checkForExtistingGame(toUser: userId, fromUser: localUserId) { [weak self] (exists, error) in
+        let alert = UIAlertController(title: "\(username) already in game", message: "Please choose another opponent", preferredStyle: .alert)
+        let confirm = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+        DataStore.shared.checkForPlayerInGame(player: playerId, state: state.rawValue) { [weak self] (inPLay, error) in
             if let error = error {
                 print(error.localizedDescription)
-                print("Error checking for game, try again later")
+                print("Error checking for player in game state, try again later")
                 return
             }
-            if !exists {
-                DataStore.shared.startGameRequest(userID: userId) { (request, error) in
-                    if request != nil {
-                        DataStore.shared.setGameRequestDeletionListener()
-                        self?.setupLoadingView(me: localUser, opponent: user, request: request)
+            if inPLay {
+                alert.addAction(confirm)
+                self?.present(alert, animated: true, completion: nil)
+                return
+            }
+            DataStore.shared.checkForExtistingGame(toUser: userId, fromUser: localUserId) { [weak self] (exists, error) in
+                if let error = error {
+                    print(error.localizedDescription)
+                    print("Error checking for game, try again later")
+                    return
+                }
+                if !exists {
+                    DataStore.shared.startGameRequest(userID: userId) { (request, error) in
+                        if request != nil {
+                            DataStore.shared.setGameRequestDeletionListener()
+                            self?.setupLoadingView(me: localUser, opponent: user, request: request)
+                        }
                     }
                 }
             }
