@@ -78,13 +78,37 @@ extension DataStore {
         gameStatusListener = nil
     }
     
-    func updateGameStatus(game: Game) {
+    func updateGameStatus(game: Game, newState: String) {
         let gameRef = database.collection(FirebaseCollections.games.rawValue).document(game.id)
-        do {
-            try gameRef.setData(from: game)
-        } catch {
-            print(error.localizedDescription)
+        gameRef.updateData(["state" : newState])
+    }
+    
+    func checkForOngoingGameWith(userId: String, completion: @escaping (_ userInGame: Bool, _ error: Error?) -> Void) {
+        let gameRef = database.collection(FirebaseCollections.games.rawValue).whereField("playerIds", arrayContains: userId).whereField("state", isNotEqualTo: Game.GameState.finished.rawValue)
+        gameRef.getDocuments { (snapshot, error) in
+            if let error = error {
+                completion(true, error)
+                return
+            }
+            if let snapshot = snapshot, snapshot.documents.count > 0 {
+                completion(true, nil)
+                return
+            }
+            completion(false, nil)
         }
     }
     
+//    func checkForPlayerInGame(player: [String], state: String, completion: @escaping (_ inGame: Bool, _ error: Error?) -> Void) {
+//        let gameRef = database.collection(FirebaseCollections.games.rawValue).whereField("playerIds", arrayContains: player).whereField("state", notIn: [Game.GameState.finished])
+//        gameRef.getDocuments { (snapshot, error) in
+//            if let error = error {
+//                completion(false, error)
+//                return
+//            }
+//            if let snapshot = snapshot, snapshot.documents.count > 0 {
+//                completion(true, nil)
+//                return
+//            }
+//        }
+//    }
 }

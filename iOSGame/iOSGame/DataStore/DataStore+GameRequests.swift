@@ -33,21 +33,7 @@ extension DataStore {
                            fromUsername: localUser?.username)
     }
     
-    func checkForPlayerInGame(player: [String], state: String, completion: @escaping (_ inGame: Bool, _ error: Error?) -> Void) {
-        let gameRef = database.collection(FirebaseCollections.games.rawValue).whereField("playerIds", arrayContains: player).whereField("state", notIn: [Game.GameState.finished])
-        gameRef.getDocuments { (snapshot, error) in
-            if let error = error {
-                completion(false, error)
-                return
-            }
-            if let snapshot = snapshot, snapshot.documents.count > 0 {
-                completion(true, nil)
-                return
-            }
-        }
-    }
-    
-    func checkForExtistingGame(toUser: String, fromUser: String, completion: @escaping(_ exists: Bool, _ error: Error?) -> Void ) {
+    func checkForExtistingGameRequest(toUser: String, fromUser: String, completion: @escaping(_ exists: Bool, _ error: Error?) -> Void ) {
         let gameRequestRef = database.collection(FirebaseCollections.gameRequests.rawValue)
             .whereField("from", isEqualTo: fromUser)
             .whereField("to", isEqualTo: toUser)

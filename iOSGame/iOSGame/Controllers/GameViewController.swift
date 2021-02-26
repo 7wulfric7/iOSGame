@@ -32,12 +32,16 @@ class GameViewController: UIViewController {
     private func updateGame(updatedGame: Game) {
         lblGameStatus.text = updatedGame.state.rawValue
         game = updatedGame
+        if updatedGame.state == .finished {
+            dismiss(animated: true, completion: nil)
+        }
     }
     
     @IBAction func onClose(_ sender: UIButton) {
         let alert = UIAlertController(title: nil, message: "Are you sure you want to exit?", preferredStyle: .alert)
         let exit = UIAlertAction(title: "Exit", style: .destructive) { [weak self] _ in
             // we need to update the oher player
+            DataStore.shared.updateGameStatus(game: (self?.game)!, newState: Game.GameState.finished.rawValue)
             self?.dismiss(animated: true, completion: nil)
         }
         let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)

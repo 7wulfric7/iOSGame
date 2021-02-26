@@ -117,7 +117,9 @@ class HomeViewController: UIViewController {
         if shouldUpdateGame {
             var newGame = game
             newGame.state = .inprogress
-            DataStore.shared.updateGameStatus(game: newGame)
+            var newState = game
+            newState.state = .finished
+            DataStore.shared.updateGameStatus(game: newGame, newState: Game.GameState.inprogress.rawValue)
             performSegue(withIdentifier: "gameSeque", sender: newGame)
         } else {
             performSegue(withIdentifier: "gameSeque", sender: game)
@@ -168,45 +170,46 @@ extension HomeViewController: UITableViewDataSource {
 
 // MARK: - UserCellDelegate
 extension HomeViewController: UserCellDelegate {
-    
     func requestGameWith(user: User) {
         guard let userId = user.id,
-              let username = user.username,
               let localUser = DataStore.shared.localUser,
-              let playerId = game?.playerIds,
-              let state = game?.state,
               let localUserId = localUser.id else {return}
-        let alert = UIAlertController(title: "\(username) already in game", message: "Please choose another opponent", preferredStyle: .alert)
-        let confirm = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-        DataStore.shared.checkForPlayerInGame(player: playerId, state: state.rawValue) { [weak self] (inPLay, error) in
+        DataStore.shared.checkForExtistingGameRequest(toUser: userId, fromUser: localUserId) { [weak self] (exists, error) in
             if let error = error {
                 print(error.localizedDescription)
-                print("Error checking for player in game state, try again later")
+                print("Error checking for game, try again later")
                 return
             }
-            if inPLay {
-                alert.addAction(confirm)
+            if !exists {
+                self?.checkForOngoingGame(userId: userId, localUser: localUser, opponent: user)
+            }
+        }
+    }
+    
+    func checkForOngoingGame(userId: String, localUser: User, opponent: User) {
+        guard let username = localUser.username else { return }
+        let alert = UIAlertController(title: "\(username) already in game", message: "Please choose another opponent", preferredStyle: .alert)
+        let confirm = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+        alert.addAction(confirm)
+        DataStore.shared.checkForOngoingGameWith(userId: userId) { [weak self] (userInGame, error) in
+            if !userInGame {
+                self?.setGameRequestTo(userId: userId, localUser: localUser, opponent: opponent)
+            } else {
                 self?.present(alert, animated: true, completion: nil)
-                return
             }
-            DataStore.shared.checkForExtistingGame(toUser: userId, fromUser: localUserId) { [weak self] (exists, error) in
-                if let error = error {
-                    print(error.localizedDescription)
-                    print("Error checking for game, try again later")
-                    return
-                }
-                if !exists {
-                    DataStore.shared.startGameRequest(userID: userId) { (request, error) in
-                        if request != nil {
-                            DataStore.shared.setGameRequestDeletionListener()
-                            self?.setupLoadingView(me: localUser, opponent: user, request: request)
-                        }
-                    }
-                }
+        }
+    }
+    
+    func setGameRequestTo(userId: String, localUser: User, opponent: User) {
+        DataStore.shared.startGameRequest(userID: userId) { [weak self] (request, error) in
+            if request != nil {
+                DataStore.shared.setGameRequestDeletionListener()
+                self?.setupLoadingView(me: localUser, opponent: opponent, request: request)
             }
         }
     }
 }
+
 
 // MARK: - LoadingViewHandling
 extension HomeViewController {
