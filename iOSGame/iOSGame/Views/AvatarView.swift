@@ -10,6 +10,7 @@ import SnapKit
 
 enum AvatarUIState {
     case lodaing
+    case imageAndName
 }
 
 class AvatarView: UIView {
@@ -73,6 +74,9 @@ class AvatarView: UIView {
             stackView.addArrangedSubview(lblUsername)
             stackView.addArrangedSubview(avatarImage)
             stackView.addArrangedSubview(lblWinsLoses)
+        case .imageAndName:
+            addSubview(avatarImage)
+            addSubview(lblUsername)
         }
         setupConstraints()
     }
@@ -87,6 +91,8 @@ class AvatarView: UIView {
                 make.width.equalTo(85)
                 make.height.equalTo(100)
             }
+        case .imageAndName:
+            
         }
     }
 }

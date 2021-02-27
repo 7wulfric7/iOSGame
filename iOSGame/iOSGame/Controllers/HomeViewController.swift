@@ -130,7 +130,7 @@ class HomeViewController: UIViewController {
     @IBAction func onExpand(_ sender: UIButton) {
         let isExpanded = tableHolderBottomConstraint.constant == 0
         tableHolderBottomConstraint.constant = isExpanded ? tableHolderView.frame.height : 0
-        self.btnExpand.setImage(UIImage(named: isExpanded ? "ButtonUp" : "ButtonDown"), for: .normal)
+        self.btnExpand.setImage(UIImage(named: isExpanded ? "ButtonDown" : "ButtonUp"), for: .normal)
         UIView.animate(withDuration: 0.5, delay: 0.0, options: [.curveEaseInOut]) {
             self.view.layoutIfNeeded()
             // Animating frames instead of constraints:
@@ -187,8 +187,8 @@ extension HomeViewController: UserCellDelegate {
     }
     
     func checkForOngoingGame(userId: String, localUser: User, opponent: User) {
-        guard let username = localUser.username else { return }
-        let alert = UIAlertController(title: "\(username) already in game", message: "Please choose another opponent", preferredStyle: .alert)
+        guard let opponentUsername = opponent.username else { return }
+        let alert = UIAlertController(title: "\(opponentUsername) already in game", message: "Please choose another opponent", preferredStyle: .alert)
         let confirm = UIAlertAction(title: "OK", style: .cancel, handler: nil)
         alert.addAction(confirm)
         DataStore.shared.checkForOngoingGameWith(userId: userId) { [weak self] (userInGame, error) in

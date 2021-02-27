@@ -179,8 +179,8 @@
                                                     <constraint firstAttribute="width" constant="50" id="2KT-1U-L8d"/>
                                                     <constraint firstAttribute="height" constant="50" id="Cx0-UK-qrI"/>
                                                 </constraints>
-                                                <state key="normal" image="ButtonDown"/>
-                                                <state key="selected" image="ButtonUp"/>
+                                                <state key="normal" image="ButtonUp"/>
+                                                <state key="selected" image="ButtonDown"/>
                                                 <connections>
                                                     <action selector="onExpand:" destination="swM-e0-lGH" eventType="touchUpInside" id="fys-pX-6P1"/>
                                                 </connections>
@@ -310,7 +310,7 @@
         <image name="ButtonUp" width="50" height="50"/>
         <image name="HomeImage" width="652" height="323.5"/>
         <image name="SplashScreenGroup" width="660" height="317"/>
-        <image name="gameBackground" width="413" height="408"/>
+        <image name="gameBackground" width="412.5" height="407.5"/>
         <image name="gradientBackground" width="375" height="812"/>
         <image name="xmark" catalog="system" width="128" height="113"/>
         <systemColor name="systemBackgroundColor">
