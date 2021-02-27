@@ -10,15 +10,22 @@ import UIKit
 class GameViewController: UIViewController {
     
     @IBOutlet weak var lblGameStatus: UILabel!
+    @IBOutlet weak var btnRandom: UIButton!
+    @IBOutlet weak var btnRock: UIButton!
+    @IBOutlet weak var btnPaper: UIButton!
+    @IBOutlet weak var btnScissors: UIButton!
     
     var game: Game?
-    var opponent: User?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setGameStatusListener()
         
         lblGameStatus.text = game?.state.rawValue
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
     }
     
     private func setGameStatusListener() {
@@ -52,6 +59,7 @@ class GameViewController: UIViewController {
 //        alert.addAction(cancel)
 //        present(alert, animated: true, completion: nil)
 //    }
+    
     private func showAlertForExit(title: String?, message: String?) {
             let alert = UIAlertController(title: title,
                                           message: message,
@@ -83,5 +91,22 @@ class GameViewController: UIViewController {
     @IBAction func onClose(_ sender: UIButton) {
         showAlertForExit(title: nil, message: "Are you sure you want to exit?")
     }
+    
+    @IBAction func onRandom(_ sender: UIButton) {
+        
+    }
+    
+    @IBAction func onRock(_ sender: UIButton) {
+    
+    }
+    
+    @IBAction func onPaper(_ sender: UIButton) {
+    
+    }
+    
+    @IBAction func onScissors(_ sender: UIButton) {
+    
+    }
+    
     
 }
