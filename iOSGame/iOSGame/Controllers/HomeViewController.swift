@@ -7,7 +7,7 @@
 
 import UIKit
 
-class HomeViewController: UIViewController {
+class HomeViewController: UIViewController, AlertPresenter {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var tableHolderView: UIView!
@@ -154,10 +154,10 @@ class HomeViewController: UIViewController {
                 
             }
         }
-        
     }
-    
+
 }
+
 //MARK: = Navigation
 extension HomeViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -216,7 +216,7 @@ extension HomeViewController: UserCellDelegate {
     func setGameRequestTo(userId: String, localUser: User, opponent: User) {
         DataStore.shared.startGameRequest(userID: userId) { [weak self] (request, error) in
             if request != nil {
-                DataStore.shared.setGameRequestDeletionListener()
+                
                 self?.setupLoadingView(me: localUser, opponent: opponent, request: request)
             }
         }
@@ -231,7 +231,7 @@ extension HomeViewController {
             loadingView?.removeFromSuperview()
             loadingView = nil
         }
-        loadingView = LoadingView(me: me, opponent: opponent, request: request)
+        loadingView = LoadingView(me: me, opponent: opponent, request: request, alertPresenter: self)
         loadingView?.gameAccepted = { [weak self] game in
             self?.enterGame(game, true)
         }
@@ -247,3 +247,4 @@ extension HomeViewController {
         loadingView = nil
     }
 }
+

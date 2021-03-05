@@ -57,12 +57,14 @@ class LoadingView: UIView {
     private var cancelGameTimer: Timer?
     private var gameRequest: GameRequest?
     private var elapsedSeconds = 0
+    private var alertPresenter: AlertPresenter?
     var gameAccepted: ((_ game: Game) -> Void)?
     
-    init(me: User, opponent: User, request: GameRequest?) {
+    init(me: User, opponent: User, request: GameRequest?, alertPresenter: AlertPresenter? = nil) {
         self.me = me
         self.opponent = opponent
         gameRequest = request
+        self.alertPresenter = alertPresenter
         super.init(frame: .zero)
         backgroundColor = UIColor(hex: "#3545C8")
         setupViews()
@@ -88,6 +90,14 @@ class LoadingView: UIView {
         closeTimer = nil
         cancelGameTimer?.invalidate()
         cancelGameTimer = nil
+    }
+    
+    private func setGameRequestDelitionListener() {
+        DataStore.shared.setGameRequestDeletionListener { [weak self] in
+            self?.removeTimers()
+            self?.removeFromSuperview()
+            self?.alertPresenter?.showGameRequestDeclineedAlert()
+        }
     }
     
     private func setGameListener() {

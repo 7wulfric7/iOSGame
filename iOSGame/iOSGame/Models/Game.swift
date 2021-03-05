@@ -69,7 +69,7 @@ struct Game: Codable {
         self.id = id
         self.players = players
         self.moves = moves
-        //Complact map because we dpn't want "nil" values in the array.
+        //Complact map because we don't want "nil" values in the array.
         playerIds = players.compactMap({ $0.id })
         //        players = players[0].id! players[1].id!
         //Not in arguments they have the same values for every game which is not yet started

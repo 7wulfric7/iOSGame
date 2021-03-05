@@ -9,7 +9,6 @@ import UIKit
 
 class GameViewController: UIViewController {
    
-    
     @IBOutlet weak var lblGameStatus: UILabel!
     @IBOutlet weak var btnRandom: UIButton!
     @IBOutlet weak var btnRock: UIButton!
@@ -17,6 +16,7 @@ class GameViewController: UIViewController {
     @IBOutlet weak var btnScissors: UIButton!
     
     var game: Game?
+    var user: User?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -78,15 +78,26 @@ class GameViewController: UIViewController {
         } else if otherMove == .idle {
             // Still waiting
         } else {
-            // We have both picks
+            // We have both picked
             if let mMove = myMove, let oMove = otherMove {
+                // This if will succeed only if local usre is winner, the other user will get listener for the game with updated property
                 if mMove > oMove {
                     // Winner is mMove
-                } else {
-                    // Winner is oMove
+                    DataStore.shared.removeGameListener()
+                    self.game?.winner = game.players.filter({ $0.id == localUserId }).first
+                    DataStore.shared.updateGameMoves(game: self.game!)
+                    self.continueToResults()
                 }
             }
         }
+    }
+    
+    private func continueToResults() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let controller = storyboard.instantiateViewController(withIdentifier: "ResultViewController") as! ResultViewController
+        controller.game = game
+        navigationController?.modalPresentationStyle = .fullScreen
+        present(controller, animated: true, completion: nil)
     }
     
 //    func showAlertWith(title: String?, message: String?, isExit: Bool = true) {
@@ -145,24 +156,32 @@ class GameViewController: UIViewController {
         DataStore.shared.updateGameMoves(game: game)
         // More Swifty way of doing thing:
 //        game.moves[localUserId] = Moves.allCases.filter { $0 != .idle }.randomElements()
+        btnRandom.isSelected = true
+        shouldEnableButtons(enable: false)
     }
     
     @IBAction func onRock(_ sender: UIButton) {
         guard let localUserId = DataStore.shared.localUser?.id, var game = game else { return }
         game.moves[localUserId] = .rock
         DataStore.shared.updateGameMoves(game: game)
+        btnRock.isSelected = true
+        shouldEnableButtons(enable: false)
     }
     
     @IBAction func onPaper(_ sender: UIButton) {
         guard let localUserId = DataStore.shared.localUser?.id, var game = game else { return }
         game.moves[localUserId] = .paper
         DataStore.shared.updateGameMoves(game: game)
+        btnPaper.isSelected = true
+        shouldEnableButtons(enable: false)
     }
     
     @IBAction func onScissors(_ sender: UIButton) {
         guard let localUserId = DataStore.shared.localUser?.id, var game = game else { return }
         game.moves[localUserId] = .scissors
         DataStore.shared.updateGameMoves(game: game)
+        btnScissors.isSelected = true
+        shouldEnableButtons(enable: false)
     }
     
     

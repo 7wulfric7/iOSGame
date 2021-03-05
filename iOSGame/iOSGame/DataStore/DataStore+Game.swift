@@ -13,9 +13,9 @@ extension DataStore {
         let gamesRef = database.collection(FirebaseCollections.games.rawValue).document()
         var moves = [String:Moves]()
         // we set the moves to .idle for every player
-//        players.forEach { (user) in
-//            moves[user.id!] = .idle
-//        }
+        //        players.forEach { (user) in
+        //            moves[user.id!] = .idle
+        //        }
         // Moves representation:
         // {
         //   "playerId1" = "idle"
@@ -112,6 +112,23 @@ extension DataStore {
     
     func updateGameMoves(game: Game) {
         let gameRef = database.collection(FirebaseCollections.games.rawValue).document(game.id)
-        gameRef.updateData(["moves" : game.moves])
+        //        gameRef.updateData(["moves" : game.moves])
+        do {
+            try gameRef.setData(from: game, merge: true)
+        } catch {
+            print(error.localizedDescription)
+        }
     }
+    
+    func updateWinner(game: Game) {
+        guard let winner = game.winner else {return}
+        let winnerRef = database.collection(FirebaseCollections.games.rawValue).document(game.id)
+        //        winnerRef.updateData(["winner" : winner])
+        do {
+            try winnerRef.setData(from: winner, merge: true)
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+    
 }

@@ -26,12 +26,14 @@
 		2272CCC525DD91810007C56A /* DataStore+Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2272CCC425DD91810007C56A /* DataStore+Game.swift */; };
 		2272CCC825DD99350007C56A /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2272CCC725DD99350007C56A /* GameViewController.swift */; };
 		227A199125D80F8A00092A5D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227A199025D80F8A00092A5D /* Constants.swift */; };
+		227A7DE225F2AB3400803B64 /* AlertPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227A7DE125F2AB3400803B64 /* AlertPresenter.swift */; };
 		22A739B925CB15DC002697AA /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 22A739B825CB15DC002697AA /* SnapKit */; };
 		22A739BD25CB1C74002697AA /* UITableViewCell+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A739BC25CB1C74002697AA /* UITableViewCell+Extensions.swift */; };
 		22A739C025CB21B4002697AA /* GameRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A739BF25CB21B4002697AA /* GameRequest.swift */; };
 		22A739C325CB2254002697AA /* DataStore+GameRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A739C225CB2254002697AA /* DataStore+GameRequests.swift */; };
 		22A739C625CB2322002697AA /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A739C525CB2322002697AA /* Date.swift */; };
 		22D0ED9E25E436940032D939 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D0ED9D25E436940032D939 /* SplashViewController.swift */; };
+		22F0263425EFAC6C000750D5 /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F0263325EFAC6C000750D5 /* ResultViewController.swift */; };
 		619EA619532E4A8934D54E63 /* Pods_iOSGame.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C946A3B708033CC8FB212DB9 /* Pods_iOSGame.framework */; };
 /* End PBXBuildFile section */
 
@@ -59,11 +61,13 @@
 		2272CCC425DD91810007C56A /* DataStore+Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DataStore+Game.swift"; sourceTree = "<group>"; };
 		2272CCC725DD99350007C56A /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		227A199025D80F8A00092A5D /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		227A7DE125F2AB3400803B64 /* AlertPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertPresenter.swift; sourceTree = "<group>"; };
 		22A739BC25CB1C74002697AA /* UITableViewCell+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+Extensions.swift"; sourceTree = "<group>"; };
 		22A739BF25CB21B4002697AA /* GameRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameRequest.swift; sourceTree = "<group>"; };
 		22A739C225CB2254002697AA /* DataStore+GameRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DataStore+GameRequests.swift"; sourceTree = "<group>"; };
 		22A739C525CB2322002697AA /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		22D0ED9D25E436940032D939 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
+		22F0263325EFAC6C000750D5 /* ResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
 		508543EF0691BF7347F699E0 /* Pods-iOSGame.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSGame.debug.xcconfig"; path = "Target Support Files/Pods-iOSGame/Pods-iOSGame.debug.xcconfig"; sourceTree = "<group>"; };
 		C946A3B708033CC8FB212DB9 /* Pods_iOSGame.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOSGame.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -116,6 +120,7 @@
 				2210DE1D25C875AA00EC72CF /* WelcomeViewController.swift */,
 				2210DE2025C875B700EC72CF /* HomeViewController.swift */,
 				2272CCC725DD99350007C56A /* GameViewController.swift */,
+				22F0263325EFAC6C000750D5 /* ResultViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -158,6 +163,7 @@
 		2256306025C86D9C00583452 /* iOSGame */ = {
 			isa = PBXGroup;
 			children = (
+				227A7DE025F2AB1F00803B64 /* Protocols */,
 				220A877625DAF45B00652CBE /* iOSGame.entitlements */,
 				227A198F25D80F7B00092A5D /* Helpers */,
 				2223F16325D4526500BB367C /* Views */,
@@ -184,6 +190,14 @@
 				227A199025D80F8A00092A5D /* Constants.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		227A7DE025F2AB1F00803B64 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				227A7DE125F2AB3400803B64 /* AlertPresenter.swift */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 		22A739BB25CB1C47002697AA /* Extensions */ = {
@@ -327,7 +341,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				2256306625C86D9C00583452 /* ViewController.swift in Sources */,
+				227A7DE225F2AB3400803B64 /* AlertPresenter.swift in Sources */,
 				2210DE1325C8700900EC72CF /* DataStore.swift in Sources */,
+				22F0263425EFAC6C000750D5 /* ResultViewController.swift in Sources */,
 				22A739C325CB2254002697AA /* DataStore+GameRequests.swift in Sources */,
 				2256306225C86D9C00583452 /* AppDelegate.swift in Sources */,
 				2223F16C25D45F4400BB367C /* UIColor.swift in Sources */,
