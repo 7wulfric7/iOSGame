@@ -17,30 +17,36 @@ class ResultViewController: UIViewController {
     @IBOutlet weak var btnRestartGame: UIButton!
     @IBOutlet weak var btnNext: UIButton!
     @IBOutlet weak var btnBoost: UIButton!
-    @IBOutlet weak var lblLooser: UILabel!
     
     var game: Game?
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        if let winner = game?.winner {
-            lblWinner.text = winner.username
-            let looser = game?.players.filter({ $0.id != winner.id }).first
-            lblLooser.text = looser?.username
-        }
+        showWinnerLooserInfo()
         
-        if let gameController = presentingViewController as? GameViewController {
-            gameController.dismiss(animated: true, completion: nil)
-        }
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
 
+    private func showWinnerLooserInfo() {
+        if let winner = game?.winner {
+            guard let winnerImage = winner.avatarImage,
+                  let winnerPlayer = winner.username,
+                  let looser = game?.players.filter({ $0.id != winner.id }).first,
+                  let looserPlayer = looser.username
+            else {return}
+            lblWinner.text = "\(winnerPlayer) WINS! \n\(looserPlayer) LOOSES!"
+            userImage.image = UIImage(named: winnerImage)
+        }
+    }
+    
     @IBAction func onHome(_ sender: UIButton) {
-        
+        if let gameController = presentingViewController as? GameViewController {
+            gameController.dismiss(animated: true, completion: nil)
+        }
     }
     
     @IBAction func onRestartGame(_ sender: UIButton) {

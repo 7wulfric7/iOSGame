@@ -294,6 +294,7 @@
                                     <constraint firstAttribute="width" constant="80" id="bb5-8m-Lrc"/>
                                 </constraints>
                                 <state key="normal" image="random"/>
+                                <state key="selected" image="random selected"/>
                                 <connections>
                                     <action selector="onRandom:" destination="swD-vT-5R4" eventType="touchUpInside" id="vfC-2O-wbG"/>
                                 </connections>
@@ -307,7 +308,6 @@
                                 <state key="normal" image="rock"/>
                                 <state key="selected" image="rock selected"/>
                                 <connections>
-                                    <action selector="onRandom:" destination="swD-vT-5R4" eventType="touchUpInside" id="sBe-2G-cd6"/>
                                     <action selector="onRock:" destination="swD-vT-5R4" eventType="touchUpInside" id="q9F-uI-6DY"/>
                                 </connections>
                             </button>
@@ -386,17 +386,19 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8ob-TE-QYA">
-                                <rect key="frame" x="119" y="322" width="176" height="176"/>
+                                <rect key="frame" x="119" y="302" width="176" height="176"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="player photo" translatesAutoresizingMaskIntoConstraints="NO" id="ufI-gZ-xC3">
                                         <rect key="frame" x="0.0" y="0.0" width="176" height="176"/>
                                     </imageView>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="avatarOne" translatesAutoresizingMaskIntoConstraints="NO" id="jUs-jq-YcT">
-                                        <rect key="frame" x="45.5" y="41" width="85" height="100"/>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jUs-jq-YcT">
+                                        <rect key="frame" x="45.5" y="40" width="85" height="102"/>
+                                        <color key="tintColor" red="1" green="0.69803921570000005" blue="0.29803921570000003" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="100" id="7nV-Yy-lDD"/>
                                             <constraint firstAttribute="width" constant="85" id="zVT-8l-k0a"/>
                                         </constraints>
+                                        <imageReference key="image" image="person" catalog="system" symbolScale="large" renderingMode="template"/>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -411,10 +413,10 @@
                                     <constraint firstItem="ufI-gZ-xC3" firstAttribute="top" secondItem="8ob-TE-QYA" secondAttribute="top" id="kud-27-jVO"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nvp-VK-zbD">
-                                <rect key="frame" x="50" y="524" width="314" height="40"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nvp-VK-zbD">
+                                <rect key="frame" x="50" y="504" width="314" height="60"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" priority="750" constant="40" id="YDx-Dt-uaO"/>
+                                    <constraint firstAttribute="height" priority="750" constant="60" id="YDx-Dt-uaO"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="21"/>
                                 <color key="textColor" red="1" green="0.69803921568627447" blue="0.29803921568627451" alpha="1" colorSpace="calibratedRGB"/>
@@ -481,13 +483,6 @@
                                     <constraint firstItem="Wwf-t9-x4E" firstAttribute="leading" secondItem="X4b-4k-4ZT" secondAttribute="leading" id="uvc-ns-Paw"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D94-dV-kgG">
-                                <rect key="frame" x="165" y="136" width="85" height="62"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="gu9-Tl-DCt"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -515,7 +510,6 @@
                         <outlet property="btnRestartGame" destination="yn7-7v-c6h" id="elx-dQ-nwP"/>
                         <outlet property="btnsHolderView" destination="X4b-4k-4ZT" id="AEK-WU-3mR"/>
                         <outlet property="imageHolderView" destination="8ob-TE-QYA" id="gLx-zz-E8k"/>
-                        <outlet property="lblLooser" destination="D94-dV-kgG" id="0Bi-z4-wmA"/>
                         <outlet property="lblWinner" destination="Nvp-VK-zbD" id="YVv-Xn-lx7"/>
                         <outlet property="userImage" destination="jUs-jq-YcT" id="LeC-Xd-Tic"/>
                     </connections>
@@ -533,7 +527,6 @@
         <image name="ButtonUp" width="50" height="50"/>
         <image name="HomeImage" width="652" height="323.5"/>
         <image name="SplashScreenGroup" width="660" height="317"/>
-        <image name="avatarOne" width="86" height="102"/>
         <image name="boost_btn" width="194" height="52"/>
         <image name="btn background" width="66" height="52"/>
         <image name="gameBackground" width="412.5" height="407.5"/>
@@ -542,8 +535,10 @@
         <image name="next_btn" width="22" height="20"/>
         <image name="paper" width="80" height="80"/>
         <image name="paper selected" width="80" height="80"/>
+        <image name="person" catalog="system" width="128" height="117"/>
         <image name="player photo" width="176" height="176"/>
         <image name="random" width="80" height="80"/>
+        <image name="random selected" width="80" height="80"/>
         <image name="refresh_btn" width="22" height="26"/>
         <image name="rock" width="80" height="80"/>
         <image name="rock selected" width="80" height="80"/>
