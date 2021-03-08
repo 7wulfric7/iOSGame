@@ -77,7 +77,7 @@ class UserTableViewCell: UITableViewCell {
         contentView.addSubview(userImage)
         contentView.addSubview(lblUsername)
         contentView.addSubview(btnStart)
-        contentView.layer.backgroundColor = UIColor(hex: "F5F8FA").cgColor
+        contentView.layer.backgroundColor = UIColor(hex: "2D2599").cgColor
 //        contentView.addSubview(activityIndicator)
 //        activityIndicator.isHidden = true
         backgroundImage.snp.makeConstraints { make in

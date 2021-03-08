@@ -9,6 +9,7 @@ import UIKit
 import Firebase
 import UserNotificationsUI
 import FirebaseMessaging
+import SwiftMessages
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
@@ -81,10 +82,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
         saveTokenForUser(deviceToken: fcmToken)
     }
     
+    private func showInAppNotification() {
+        let view = MessageView.viewFromNib(layout: .cardView)
+        var config = SwiftMessages.Config()
+        config.dimMode = .gray(interactive: true)
+        config.duration = .seconds(seconds: 2.0)
+        config.presentationStyle = .center
+        
+        view.configureContent(title: "New game request", body: "", iconImage: nil, iconText: nil, buttonImage: nil, buttonTitle: "Accept") { (_) in
+            
+        }
+        SwiftMessages.show(config: config, view: view)
+    }
+    
 }
 
 extension AppDelegate: UNUserNotificationCenterDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        if UIApplication.shared.applicationState == .active {
+            //show swift message
+            completionHandler([.sound])
+            return
+        }
         completionHandler([.alert, .badge, .sound])
     }
     

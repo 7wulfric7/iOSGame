@@ -294,7 +294,6 @@
                                     <constraint firstAttribute="width" constant="80" id="bb5-8m-Lrc"/>
                                 </constraints>
                                 <state key="normal" image="random"/>
-                                <state key="selected" image="random selected"/>
                                 <connections>
                                     <action selector="onRandom:" destination="swD-vT-5R4" eventType="touchUpInside" id="vfC-2O-wbG"/>
                                 </connections>
@@ -538,7 +537,6 @@
         <image name="person" catalog="system" width="128" height="117"/>
         <image name="player photo" width="176" height="176"/>
         <image name="random" width="80" height="80"/>
-        <image name="random selected" width="80" height="80"/>
         <image name="refresh_btn" width="22" height="26"/>
         <image name="rock" width="80" height="80"/>
         <image name="rock selected" width="80" height="80"/>

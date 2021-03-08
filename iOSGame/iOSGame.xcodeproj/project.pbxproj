@@ -12,6 +12,7 @@
 		2210DE1E25C875AA00EC72CF /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2210DE1D25C875AA00EC72CF /* WelcomeViewController.swift */; };
 		2210DE2125C875B700EC72CF /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2210DE2025C875B700EC72CF /* HomeViewController.swift */; };
 		2210DE2425C8783F00EC72CF /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2210DE2325C8783F00EC72CF /* UserTableViewCell.swift */; };
+		222312A925F697B6003DEB56 /* SwiftMessages in Frameworks */ = {isa = PBXBuildFile; productRef = 222312A825F697B6003DEB56 /* SwiftMessages */; };
 		2223F16525D4528C00BB367C /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2223F16425D4528C00BB367C /* LoadingView.swift */; };
 		2223F16925D454BB00BB367C /* AvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2223F16825D454BB00BB367C /* AvatarView.swift */; };
 		2223F16C25D45F4400BB367C /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2223F16B25D45F4400BB367C /* UIColor.swift */; };
@@ -78,6 +79,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				619EA619532E4A8934D54E63 /* Pods_iOSGame.framework in Frameworks */,
+				222312A925F697B6003DEB56 /* SwiftMessages in Frameworks */,
 				22A739B925CB15DC002697AA /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -239,6 +241,7 @@
 			name = iOSGame;
 			packageProductDependencies = (
 				22A739B825CB15DC002697AA /* SnapKit */,
+				222312A825F697B6003DEB56 /* SwiftMessages */,
 			);
 			productName = iOSGame;
 			productReference = 2256305E25C86D9C00583452 /* iOSGame.app */;
@@ -269,6 +272,7 @@
 			mainGroup = 2256305525C86D9C00583452;
 			packageReferences = (
 				22A739B725CB15DC002697AA /* XCRemoteSwiftPackageReference "SnapKit" */,
+				222312A725F697B6003DEB56 /* XCRemoteSwiftPackageReference "SwiftMessages" */,
 			);
 			productRefGroup = 2256305F25C86D9C00583452 /* Products */;
 			projectDirPath = "";
@@ -575,6 +579,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		222312A725F697B6003DEB56 /* XCRemoteSwiftPackageReference "SwiftMessages" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftKickMobile/SwiftMessages";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.0;
+			};
+		};
 		22A739B725CB15DC002697AA /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
@@ -586,6 +598,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		222312A825F697B6003DEB56 /* SwiftMessages */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 222312A725F697B6003DEB56 /* XCRemoteSwiftPackageReference "SwiftMessages" */;
+			productName = SwiftMessages;
+		};
 		22A739B825CB15DC002697AA /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 22A739B725CB15DC002697AA /* XCRemoteSwiftPackageReference "SnapKit" */;

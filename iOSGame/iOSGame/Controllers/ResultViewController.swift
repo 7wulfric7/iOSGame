@@ -45,7 +45,9 @@ class ResultViewController: UIViewController {
     
     @IBAction func onHome(_ sender: UIButton) {
         if let gameController = presentingViewController as? GameViewController {
-            gameController.dismiss(animated: true, completion: nil)
+            dismiss(animated: false) {
+                gameController.dismiss(animated: false, completion: nil)
+            }
         }
     }
     
