@@ -50,47 +50,47 @@ extension DataStore {
         }
     }
     
-    func setGameRequestListener() {
-        if gameRequestListener != nil {
-            removeGameRequestListener()
-        }
-        guard let localUserId = localUser?.id else { return }
-        gameRequestListener = database
-            .collection(FirebaseCollections.gameRequests.rawValue)
-            .whereField("to", isEqualTo: localUserId)
-            .addSnapshotListener({ (snapshot, error) in
-                if let snapshot = snapshot, let document = snapshot.documents.first {
-                    do {
-                        let gameRequest = try document.data(as: GameRequest.self)
-                        NotificationCenter.default.post(name: Notification.Name("DidReceiveGameRequestNotification"), object: nil, userInfo: ["GameRequest":gameRequest as Any])
-                        print("New GameRequest With " + (gameRequest?.from ?? ""))
-                    } catch {
-                        print(error.localizedDescription)
-                    }
-                }
-            })
-    }
-    
-    func setAcceptGameRequestListener(_ request: GameRequest?) {
-        if gameRequestListener != nil {
-            removeGameRequestListener()
-        }
-        guard let localUserId = localUser?.id else { return }
-        gameRequestListener = database
-            .collection(FirebaseCollections.gameRequests.rawValue)
-            .whereField("to", isEqualTo: localUserId)
-            .addSnapshotListener({ (snapshot, error) in
-                if let snapshot = snapshot, let document = snapshot.documents.first {
-                    do {
-                        let request = try document.data(as: GameRequest.self)
-                        NotificationCenter.default.post(name: Notification.Name("AcceptGameRequestNotification"), object: nil, userInfo: ["GameRequest":request as Any])
-                        print("New GameRequest With " + (request?.from ?? ""))
-                    } catch {
-                        print(error.localizedDescription)
-                    }
-                }
-            })
-    }
+//    func setGameRequestListener() {
+//        if gameRequestListener != nil {
+//            removeGameRequestListener()
+//        }
+//        guard let localUserId = localUser?.id else { return }
+//        gameRequestListener = database
+//            .collection(FirebaseCollections.gameRequests.rawValue)
+//            .whereField("to", isEqualTo: localUserId)
+//            .addSnapshotListener({ (snapshot, error) in
+//                if let snapshot = snapshot, let document = snapshot.documents.first {
+//                    do {
+//                        let gameRequest = try document.data(as: GameRequest.self)
+//                        NotificationCenter.default.post(name: Notification.Name("DidReceiveGameRequestNotification"), object: nil, userInfo: ["GameRequest":gameRequest as Any])
+//                        print("New GameRequest With " + (gameRequest?.from ?? ""))
+//                    } catch {
+//                        print(error.localizedDescription)
+//                    }
+//                }
+//            })
+//    }
+//    
+//    func setAcceptGameRequestListener(_ request: GameRequest?) {
+//        if gameRequestListener != nil {
+//            removeGameRequestListener()
+//        }
+//        guard let localUserId = localUser?.id else { return }
+//        gameRequestListener = database
+//            .collection(FirebaseCollections.gameRequests.rawValue)
+//            .whereField("to", isEqualTo: localUserId)
+//            .addSnapshotListener({ (snapshot, error) in
+//                if let snapshot = snapshot, let document = snapshot.documents.first {
+//                    do {
+//                        let request = try document.data(as: GameRequest.self)
+//                        NotificationCenter.default.post(name: Notification.Name("AcceptGameRequestNotification"), object: nil, userInfo: ["GameRequest":request as Any])
+//                        print("New GameRequest With " + (request?.from ?? ""))
+//                    } catch {
+//                        print(error.localizedDescription)
+//                    }
+//                }
+//            })
+//    }
     
     func removeGameRequestListener() {
         gameRequestListener?.remove()

@@ -14,10 +14,11 @@ class GameViewController: UIViewController {
     @IBOutlet weak var btnRock: UIButton!
     @IBOutlet weak var btnPaper: UIButton!
     @IBOutlet weak var btnScissors: UIButton!
+    @IBOutlet weak var opponentHand: UIImageView!
+    @IBOutlet weak var localPlayerHand: UIImageView!
+    @IBOutlet weak var lblFight: UILabel!
     
     var game: Game?
-    
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +26,7 @@ class GameViewController: UIViewController {
         
         lblGameStatus.text = game?.state.rawValue
         lblGameStatus.textColor = .white
+        lblFight.text = "FIGHT"
         if let game = game {
             // short if statement:
             shouldEnableButtons(enable: game.state == .inprogress)
@@ -170,24 +172,31 @@ class GameViewController: UIViewController {
         guard let move = choices.randomElement() else {return}
         selsectButtonForMove(move: move)
         pickedMove(move)
+        lblFight.text = ""
     }
     
     @IBAction func onRock(_ sender: UIButton) {
         sender.isSelected = true
 //        makeSelectedMove()
         pickedMove(.rock)
+        localPlayerHand.image = UIImage(named: "rock_bottom")
+        lblFight.text = ""
     }
     
     @IBAction func onPaper(_ sender: UIButton) {
         sender.isSelected = true
 //        makeSelectedMove()
         pickedMove(.paper)
+        localPlayerHand.image = UIImage(named: "paper_bot")
+        lblFight.text = ""
     }
     
     @IBAction func onScissors(_ sender: UIButton) {
         sender.isSelected = true
 //        makeSelectedMove()
         pickedMove(.scissors)
+        localPlayerHand.image = UIImage(named: "scrissors_bot")
+        lblFight.text = ""
     }
     
     private func selsectButtonForMove(move: Moves) {

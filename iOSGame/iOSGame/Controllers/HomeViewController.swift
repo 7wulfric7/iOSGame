@@ -25,7 +25,7 @@ class HomeViewController: UIViewController, AlertPresenter {
         requestPushNotifications()
         title = "Welcome " + (DataStore.shared.localUser?.username ?? "")
 //        NotificationCenter.default.addObserver(self, selector: #selector(didReceiveGameRequest(_:)), name: Notification.Name("DidReceiveGameRequestNotification"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(acceptGameRequest(_:)), name: Notification.Name("AcceptGameRequestNotification"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(didReceiveGameRequest(_:)), name: Notification.Name("AcceptGameRequestNotification"), object: nil)
         setupTable()
         setupAvatarView()
         getUsers()
@@ -39,10 +39,10 @@ class HomeViewController: UIViewController, AlertPresenter {
         DataStore.shared.setUsersListener { [weak self] in
             self?.getUsers()
         }
-        if let request = PushNotificationsManager.shared.getGameRequest() {
-            showGameRequestAlert(gameRequest: request)
+        if let _ = PushNotificationsManager.shared.getGameRequest() {
+//            showGameRequestAlert(gameRequest: request)
             PushNotificationsManager.shared.clearVariables()
-            DataStore.shared.setAcceptGameRequestListener(request)
+//            DataStore.shared.setAcceptGameRequestListener(request)
         }
 //        DataStore.shared.setGameRequestListener()
         
@@ -79,19 +79,19 @@ class HomeViewController: UIViewController, AlertPresenter {
         tableView.register(UserTableViewCell.self, forCellReuseIdentifier: UserTableViewCell.reuseIdentifier)
     }
     
-    private func showGameRequestAlert(gameRequest: GameRequest) {
-        let fromUsername = gameRequest.fromUsername ?? ""
-        let alert = UIAlertController(title: "Game Request", message: "\(fromUsername) invited you for a game", preferredStyle: .alert)
-        let accept = UIAlertAction(title: "Accept", style: .default) { _ in
-            self.acceptRequest(gameRequest)
-        }
-        let decline = UIAlertAction(title: "Decline", style: .cancel) { _ in
-            self.declineRequest(gameRequest: gameRequest)
-        }
-        alert.addAction(accept)
-        alert.addAction(decline)
-        present(alert, animated: true, completion: nil)
-    }
+//    private func showGameRequestAlert(gameRequest: GameRequest) {
+//        let fromUsername = gameRequest.fromUsername ?? ""
+//        let alert = UIAlertController(title: "Game Request", message: "\(fromUsername) invited you for a game", preferredStyle: .alert)
+//        let accept = UIAlertAction(title: "Accept", style: .default) { _ in
+//            self.acceptRequest(gameRequest)
+//        }
+//        let decline = UIAlertAction(title: "Decline", style: .cancel) { _ in
+//            self.declineRequest(gameRequest: gameRequest)
+//        }
+//        alert.addAction(accept)
+//        alert.addAction(decline)
+//        present(alert, animated: true, completion: nil)
+//    }
     
     @objc private func didReceiveGameRequest(_ notification: Notification) {
         guard let userInfo = notification.userInfo as? [String: GameRequest] else { return }
@@ -100,9 +100,9 @@ class HomeViewController: UIViewController, AlertPresenter {
         acceptRequest(gameRequest)
     }
     
-    @objc private func acceptGameRequest(_ notification: Notification) {
-        didReceiveGameRequest(notification)
-    }
+//    @objc private func acceptGameRequest(_ notification: Notification) {
+//        didReceiveGameRequest(notification)
+//    }
     
     private func getUsers() {
         DataStore.shared.getAllUsers { [weak self] (users, error) in
