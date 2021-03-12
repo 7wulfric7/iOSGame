@@ -82,15 +82,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
         saveTokenForUser(deviceToken: fcmToken)
     }
     
-    private func showInAppNotification() {
+    private func showInAppNotification(requestId: String, fromUsername: String) {
         let view = MessageView.viewFromNib(layout: .cardView)
         var config = SwiftMessages.Config()
         config.dimMode = .gray(interactive: true)
-        config.duration = .seconds(seconds: 2.0)
-        config.presentationStyle = .center
+        config.duration = .forever
+        config.presentationStyle = .top
         
-        view.configureContent(title: "New game request", body: "", iconImage: nil, iconText: nil, buttonImage: nil, buttonTitle: "Accept") { (_) in
-            
+        view.configureContent(title: "New game request", body: "\(fromUsername) invited you for a game", iconImage: nil, iconText: nil, buttonImage: nil, buttonTitle: "Accept") { (_) in
+            //Click on Accept button handler
+            DataStore.shared.getGameRequestWith(id: requestId) { (request, error) in
+                if let error = error {
+                    print(error.localizedDescription)
+                    return
+                }
+                if let request = request {
+                    DataStore.shared.setAcceptGameRequestListener(request)
+                }
+            }
         }
         SwiftMessages.show(config: config, view: view)
     }
@@ -101,6 +110,11 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         if UIApplication.shared.applicationState == .active {
             //show swift message
+            guard let dict = notification.request.content.userInfo as? [String:Any],
+                  let requestId = dict["id"] as? String,
+                  let fromUsername = dict["fromUsername"] as? String
+            else { return }
+            showInAppNotification(requestId: requestId, fromUsername: fromUsername)
             completionHandler([.sound])
             return
         }
@@ -111,6 +125,12 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         switch response.actionIdentifier {
         case UNNotificationDefaultActionIdentifier:
             guard let dict = response.notification.request.content.userInfo as? [String: Any] else { return }
+//            if let aps = dict["aps"] as? [String:Any] {
+//                //remote notification
+//            } else {
+//                //local notification
+//            }
+            PushNotificationsManager.shared.handlePushNotification(dict: dict)
             print(dict)
             print("Did click on notification")
         default:

@@ -120,15 +120,4 @@ extension DataStore {
         }
     }
     
-    func updateWinner(game: Game) {
-        guard let winner = game.winner else {return}
-        let winnerRef = database.collection(FirebaseCollections.games.rawValue).document(game.id)
-        //        winnerRef.updateData(["winner" : winner])
-        do {
-            try winnerRef.setData(from: winner, merge: true)
-        } catch {
-            print(error.localizedDescription)
-        }
-    }
-    
 }

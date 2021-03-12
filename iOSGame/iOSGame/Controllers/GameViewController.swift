@@ -92,6 +92,13 @@ class GameViewController: UIViewController {
                     self.game?.state = .finished
                     DataStore.shared.updateGameMoves(game: self.game!)
                     self.continueToResults()
+                }
+                if mMove == oMove {
+                    DataStore.shared.removeGameListener()
+                    self.game?.winner = nil
+                    self.game?.state = .finished
+                    DataStore.shared.updateGameMoves(game: self.game!)
+                    self.continueToResults()
                 } else {
                     if let _ = game.winner {
                         self.continueToResults()

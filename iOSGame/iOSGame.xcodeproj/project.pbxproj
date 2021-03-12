@@ -16,6 +16,7 @@
 		2223F16525D4528C00BB367C /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2223F16425D4528C00BB367C /* LoadingView.swift */; };
 		2223F16925D454BB00BB367C /* AvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2223F16825D454BB00BB367C /* AvatarView.swift */; };
 		2223F16C25D45F4400BB367C /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2223F16B25D45F4400BB367C /* UIColor.swift */; };
+		2232965B25F939E200EC51A7 /* PushNotificationsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2232965A25F939E200EC51A7 /* PushNotificationsManager.swift */; };
 		2256306225C86D9C00583452 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2256306125C86D9C00583452 /* AppDelegate.swift */; };
 		2256306425C86D9C00583452 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2256306325C86D9C00583452 /* SceneDelegate.swift */; };
 		2256306625C86D9C00583452 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2256306525C86D9C00583452 /* ViewController.swift */; };
@@ -49,6 +50,7 @@
 		2223F16425D4528C00BB367C /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		2223F16825D454BB00BB367C /* AvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarView.swift; sourceTree = "<group>"; };
 		2223F16B25D45F4400BB367C /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
+		2232965A25F939E200EC51A7 /* PushNotificationsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationsManager.swift; sourceTree = "<group>"; };
 		2256305E25C86D9C00583452 /* iOSGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2256306125C86D9C00583452 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2256306325C86D9C00583452 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -175,6 +177,7 @@
 				2210DE1A25C8703200EC72CF /* DataStore */,
 				2210DE1525C8701200EC72CF /* Models */,
 				2256306125C86D9C00583452 /* AppDelegate.swift */,
+				2232965A25F939E200EC51A7 /* PushNotificationsManager.swift */,
 				2256306325C86D9C00583452 /* SceneDelegate.swift */,
 				2256306525C86D9C00583452 /* ViewController.swift */,
 				2256306725C86D9C00583452 /* Main.storyboard */,
@@ -356,6 +359,7 @@
 				227A199125D80F8A00092A5D /* Constants.swift in Sources */,
 				2272CCC825DD99350007C56A /* GameViewController.swift in Sources */,
 				2210DE1725C8702000EC72CF /* User.swift in Sources */,
+				2232965B25F939E200EC51A7 /* PushNotificationsManager.swift in Sources */,
 				2272CCC525DD91810007C56A /* DataStore+Game.swift in Sources */,
 				22A739C625CB2322002697AA /* Date.swift in Sources */,
 				2210DE2125C875B700EC72CF /* HomeViewController.swift in Sources */,

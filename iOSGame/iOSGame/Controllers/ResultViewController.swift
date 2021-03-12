@@ -12,11 +12,9 @@ class ResultViewController: UIViewController {
     @IBOutlet weak var imageHolderView: UIView!
     @IBOutlet weak var userImage: UIImageView!
     @IBOutlet weak var lblWinner: UILabel!
-    @IBOutlet weak var btnsHolderView: UIView!
     @IBOutlet weak var btnHome: UIButton!
-    @IBOutlet weak var btnRestartGame: UIButton!
-    @IBOutlet weak var btnNext: UIButton!
-    @IBOutlet weak var btnBoost: UIButton!
+    @IBOutlet weak var playerOne: UIImageView!
+    @IBOutlet weak var playerTwo: UIImageView!
     
     var game: Game?
     
@@ -40,7 +38,13 @@ class ResultViewController: UIViewController {
             else {return}
             lblWinner.text = "\(winnerPlayer) WINS! \n\(looserPlayer) LOOSES!"
             userImage.image = UIImage(named: winnerImage)
+        } else {
+            guard let imageOne = game?.players.first?.avatarImage, let imageTwo = game?.players.last?.avatarImage else { return }
+            lblWinner.text = "DRAW! \nTry again"
+            playerOne.image = UIImage(named: imageOne)
+            playerTwo.image = UIImage(named: imageTwo)
         }
+        
     }
     
     @IBAction func onHome(_ sender: UIButton) {
@@ -49,18 +53,6 @@ class ResultViewController: UIViewController {
                 gameController.dismiss(animated: false, completion: nil)
             }
         }
-    }
-    
-    @IBAction func onRestartGame(_ sender: UIButton) {
-        
-    }
-    
-    @IBAction func onNext(_ sender: UIButton) {
-        
-    }
-    
-    @IBAction func onBoost(_ sender: UIButton) {
-        
     }
     
 }
