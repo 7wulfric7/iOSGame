@@ -98,7 +98,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
                 }
                 if let request = request {
 //                    DataStore.shared.setAcceptGameRequestListener(request)
-                    NotificationCenter.default.post(name: Notification.Name("AcceptGameRequestNotification"), object: nil, userInfo: ["GameRequest":request as Any])
+                    NotificationCenter.default.post(name: Notification.Name("AcceptGameRequestNotification"), object: nil, userInfo: ["GameRequest":request])
                 }
             }
         }

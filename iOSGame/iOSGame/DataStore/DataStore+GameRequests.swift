@@ -25,12 +25,12 @@ extension DataStore {
         }
     }
     private func createGameRequest(toUser: String, id: String) -> GameRequest? {
-        guard let localUserId = localUser?.id else { return nil }
+        guard let localUser = DataStore.shared.localUser, let localUserId = localUser.id else { return nil }
         return GameRequest(id: id,
                            from: localUserId,
                            to: toUser,
                            createdAt: Date().toMiliseconds(),
-                           fromUsername: localUser?.username)
+                           fromUsername: localUser.username)
     }
     
     func checkForExtistingGameRequest(toUser: String, fromUser: String, completion: @escaping(_ exists: Bool, _ error: Error?) -> Void ) {

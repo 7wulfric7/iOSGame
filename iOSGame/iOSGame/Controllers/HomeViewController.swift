@@ -25,7 +25,11 @@ class HomeViewController: UIViewController, AlertPresenter {
         requestPushNotifications()
         title = "Welcome " + (DataStore.shared.localUser?.username ?? "")
 //        NotificationCenter.default.addObserver(self, selector: #selector(didReceiveGameRequest(_:)), name: Notification.Name("DidReceiveGameRequestNotification"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(didReceiveGameRequest(_:)), name: Notification.Name("AcceptGameRequestNotification"), object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(didReceiveGameRequest(_:)), name: Notification.Name("AcceptGameRequestNotification"), object: nil)
+        NotificationCenter.default.addObserver(forName: Notification.Name("AcceptGameRequestNotification"), object: nil, queue: nil) { [weak self] notification in
+            guard let userInfo = notification.userInfo as? [String:Any], let gameRequest = userInfo["GameRequest"] as? GameRequest else {return}
+            self?.acceptRequest(gameRequest)
+        }
         setupTable()
         setupAvatarView()
         getUsers()
@@ -93,12 +97,12 @@ class HomeViewController: UIViewController, AlertPresenter {
 //        present(alert, animated: true, completion: nil)
 //    }
     
-    @objc private func didReceiveGameRequest(_ notification: Notification) {
-        guard let userInfo = notification.userInfo as? [String: GameRequest] else { return }
-        guard let gameRequest = userInfo["GameRequest"] else { return }
-//        showGameRequestAlert(gameRequest: gameRequest)
-        acceptRequest(gameRequest)
-    }
+//    @objc private func didReceiveGameRequest(_ notification: Notification) {
+//        guard let userInfo = notification.userInfo as? [String: GameRequest] else { return }
+//        guard let gameRequest = userInfo["GameRequest"] else { return }
+////        showGameRequestAlert(gameRequest: gameRequest)
+//        acceptRequest(gameRequest)
+//    }
     
 //    @objc private func acceptGameRequest(_ notification: Notification) {
 //        didReceiveGameRequest(notification)
