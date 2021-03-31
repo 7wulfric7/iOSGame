@@ -259,11 +259,10 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gradientBackground" translatesAutoresizingMaskIntoConstraints="NO" id="AIg-vY-0AF">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lMF-ZW-QR6">
-                                <rect key="frame" x="-3.5" y="332.5" width="421" height="231.5"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gameBackground" translatesAutoresizingMaskIntoConstraints="NO" id="cK5-z7-cfu">
+                                <rect key="frame" x="0.0" y="245.5" width="414" height="405"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="231.5" id="eW1-SR-5zN"/>
-                                    <constraint firstAttribute="width" constant="421" id="qIm-nk-k7i"/>
+                                    <constraint firstAttribute="height" constant="405" id="37z-4W-mRX"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HF9-Yn-qit">
@@ -272,10 +271,11 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gameBackground" translatesAutoresizingMaskIntoConstraints="NO" id="cK5-z7-cfu">
-                                <rect key="frame" x="0.0" y="245.5" width="414" height="405"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="blood" translatesAutoresizingMaskIntoConstraints="NO" id="lMF-ZW-QR6">
+                                <rect key="frame" x="82" y="323" width="250" height="250"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="405" id="37z-4W-mRX"/>
+                                    <constraint firstAttribute="height" constant="250" id="eW1-SR-5zN"/>
+                                    <constraint firstAttribute="width" constant="250" id="qIm-nk-k7i"/>
                                 </constraints>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="steady_bottom" translatesAutoresizingMaskIntoConstraints="NO" id="3dM-Ow-rlA">
@@ -404,8 +404,10 @@
                         <outlet property="lblFight" destination="qSG-KO-38v" id="Vau-ct-maM"/>
                         <outlet property="lblGameStatus" destination="HF9-Yn-qit" id="BJS-j5-UyY"/>
                         <outlet property="myHandButtomConstraint" destination="VuU-dp-vzK" id="vA7-Cy-Vt6"/>
+                        <outlet property="myHandHeightConstraint" destination="XyI-Lm-0EI" id="Kc5-tF-Fto"/>
                         <outlet property="myHandImage" destination="3dM-Ow-rlA" id="SJW-WU-zkA"/>
                         <outlet property="opponentHandImage" destination="f6c-s9-3o1" id="R9y-Nb-msn"/>
+                        <outlet property="opponentHeightConstraint" destination="wZd-qe-1dP" id="tBK-d3-7aQ"/>
                         <outlet property="opponentTopConstraint" destination="sbs-ik-nOM" id="XvI-hZ-e98"/>
                         <segue destination="Bq5-Td-8dx" kind="presentation" identifier="resultSegue" id="Mv2-is-xkH"/>
                     </connections>
@@ -525,7 +527,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="loh-mF-12a"/>
+        <segue reference="SOu-jd-SHg"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="ButtonDown" width="50" height="50"/>
@@ -533,6 +535,7 @@
         <image name="HomeImage" width="652" height="323.5"/>
         <image name="SplashScreenGroup" width="660" height="317"/>
         <image name="VersuS" width="352.5" height="400.5"/>
+        <image name="blood" width="421" height="231.5"/>
         <image name="btn background" width="66" height="52"/>
         <image name="gameBackground" width="412.5" height="407.5"/>
         <image name="gradientBackground" width="375" height="812"/>
