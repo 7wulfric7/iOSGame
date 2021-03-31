@@ -22,7 +22,13 @@ class HomeViewController: UIViewController, AlertPresenter {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        #if targetEnvironment(simulator)
+        DataStore.shared.setGameRequestListener()
+        #else
         requestPushNotifications()
+        #endif
+        
         title = "Welcome " + (DataStore.shared.localUser?.username ?? "")
 //        NotificationCenter.default.addObserver(self, selector: #selector(didReceiveGameRequest(_:)), name: Notification.Name("DidReceiveGameRequestNotification"), object: nil)
 //        NotificationCenter.default.addObserver(self, selector: #selector(didReceiveGameRequest(_:)), name: Notification.Name("AcceptGameRequestNotification"), object: nil)
@@ -48,7 +54,12 @@ class HomeViewController: UIViewController, AlertPresenter {
             PushNotificationsManager.shared.clearVariables()
 //            DataStore.shared.setAcceptGameRequestListener(request)
         }
-//        DataStore.shared.setGameRequestListener()
+        let appDelegate = UIApplication.shared.delegate as? AppDelegate
+        appDelegate?.checkForEnableedPushNotifications(completion: { (enabled) in
+            if !enabled {
+                DataStore.shared.setGameRequestListener()
+            }
+        })
         
     }
     
